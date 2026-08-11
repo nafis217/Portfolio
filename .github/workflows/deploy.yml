@@ -37,12 +37,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
+          # Creates the Pages site on its first workflow run when it has not
+          # yet been enabled in the repository settings.
+          enablement: true
           static_site_generator: next
 
       - name: Install dependencies
