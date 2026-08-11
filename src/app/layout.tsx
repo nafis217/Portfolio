@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: `${PORTFOLIO_DATA.personal.name} Portfolio`,
     images: [
       {
-        url: "/Portfolio/images/nafis-portrait.jpg",
+        url: "/images/nafis-portrait.png",
         width: 800,
         height: 1000,
         alt: PORTFOLIO_DATA.personal.name,
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${PORTFOLIO_DATA.personal.name} | ${PORTFOLIO_DATA.personal.role}`,
     description: PORTFOLIO_DATA.personal.bio,
-    images: ["/Portfolio/images/nafis-portrait.jpg"],
+    images: ["/images/nafis-portrait.png"],
   },
   robots: {
     index: true,
