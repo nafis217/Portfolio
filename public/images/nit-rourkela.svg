@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+  <rect width="600" height="300" rx="12" fill="#17232D"/>
+  <!-- Decorative grid lines -->
+  <line x1="0" y1="60" x2="600" y2="60" stroke="#2A3A47" stroke-width="1"/>
+  <line x1="0" y1="120" x2="600" y2="120" stroke="#2A3A47" stroke-width="1"/>
+  <line x1="0" y1="180" x2="600" y2="180" stroke="#2A3A47" stroke-width="1"/>
+  <line x1="0" y1="240" x2="600" y2="240" stroke="#2A3A47" stroke-width="1"/>
+  
+  <text x="50" y="100" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#8FA79A" letter-spacing="3">NATIONAL INSTITUTE OF TECHNOLOGY</text>
+  <text x="50" y="170" font-family="system-ui, sans-serif" font-size="48" font-weight="900" fill="#FFFFFF" letter-spacing="-1">NIT ROURKELA</text>
+  <text x="50" y="220" font-family="system-ui, sans-serif" font-size="16" fill="#C8BCA8">B.Tech in Computer Science & Engineering — India</text>
+</svg>

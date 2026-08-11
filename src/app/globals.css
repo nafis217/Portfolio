@@ -1,0 +1,139 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --vanilla: #FFF8EC;
+    --sky: #CDEAF4;
+    --blue: #1676A8;
+    --mango: #FFB92E;
+    --coral: #FF7A45;
+    --strawberry: #F68AA6;
+    --pistachio: #79B98B;
+    --mint: #DDF1DF;
+    --lavender: #D8D2F2;
+    --cocoa: #6A4537;
+    --ink: #172432;
+    --white: #FFFFFF;
+
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-display: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-mono: "Space Grotesk", "JetBrains Mono", monospace;
+
+    --header-height: 72px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--sky);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--blue);
+    color: var(--white);
+  }
+
+  /* === scroll-margin-top for all sections to account for sticky header === */
+  #about,
+  #experience,
+  #projects,
+  #skills,
+  #education,
+  #achievements,
+  #contact {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Background grid utility */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(22, 118, 168, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 118, 168, 0.08) 1px, transparent 1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--vanilla);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--coral);
+}
+
+/* Glass & editorial header */
+.glass-header {
+  background: rgba(205, 234, 244, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Floating label inputs */
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  transform: translateY(-24px) scale(0.85);
+  color: var(--blue);
+}
+
+/* === Reduced motion — disable all non-essential animations === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep content visible even without animation */
+  [data-framer-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* === Responsive Typography Helpers === */
+.heading-display {
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.heading-section {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.heading-contact {
+  font-size: clamp(2.2rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+/* Prevent text overflow globally */
+h1, h2, h3, h4 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+p, span, li {
+  overflow-wrap: break-word;
+}
