@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nafis217.github.io/sitemap.xml
+Sitemap: https://nafis217.github.io/Portfolio/sitemap.xml
