@@ -57,21 +57,15 @@ export default function Header() {
         )}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* LEFT: Brand Logo / Monogram */}
           <Link
             href="/"
-            aria-label="Md Nafis Al Safayet — back to top"
-            className="group flex items-center gap-2 text-ink font-bold text-xl tracking-tight"
+            aria-label="Back to top"
+            className="hidden md:block font-display text-lg font-black tracking-[0.2em] text-ink hover:text-blue transition-colors"
           >
-            <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-blue text-white font-bold shadow-subtle group-hover:bg-coral transition-colors">
-              {PORTFOLIO_DATA.personal.monogram}
-            </span>
-            <span className="tracking-widest uppercase text-sm font-extrabold group-hover:text-blue transition-colors">
-              NAFIS<span className="text-coral">.</span>
-            </span>
+            NAFIS
           </Link>
 
-          {/* CENTER / RIGHT: Navigation items Desktop */}
+          {/* Navigation items */}
           <nav className="hidden md:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-ink/80">
             {NAV_ITEMS.map((item) => {
               const sectionId = item.href.substring(1);
@@ -81,14 +75,13 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "relative py-1 transition-colors hover:text-blue",
-                    isActive ? "text-blue font-extrabold" : "text-ink/80"
+                    "rounded-full px-3 py-2 -mx-3 transition-all hover:text-blue",
+                    isActive
+                      ? "bg-white/70 text-blue font-extrabold shadow-subtle"
+                      : "text-ink/80 hover:bg-white/40"
                   )}
                 >
                   {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-coral rounded-full shadow-subtle" />
-                  )}
                 </Link>
               );
             })}

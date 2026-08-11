@@ -12,7 +12,6 @@ import {
   Copy,
   Check,
   ArrowUpRight,
-  Mail,
 } from "lucide-react";
 
 const MAX_MESSAGE_LENGTH = 2000;
@@ -34,8 +33,10 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
   const email = PORTFOLIO_DATA.personal.social.email;
+  const contactEndpoint =
+    process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ||
+    `https://formsubmit.co/ajax/${email}`;
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -70,13 +71,6 @@ export default function Contact() {
 
     if (!validate()) return;
 
-    if (!formspreeEndpoint) {
-      setSubmitError(
-        "The contact form is temporarily unavailable. Please email me directly."
-      );
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -87,9 +81,11 @@ export default function Contact() {
         topic: formData.topic,
         message: formData.message,
         _replyto: formData.email,
+        _subject: `Portfolio contact: ${formData.subject}`,
+        _template: "table",
       };
 
-      const res = await fetch(formspreeEndpoint, {
+      const res = await fetch(contactEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,9 +94,9 @@ export default function Contact() {
         body: JSON.stringify(payload),
       });
 
-      const responseData = await res.json();
+      const responseData = await res.json().catch(() => null);
 
-      if (res.ok && !responseData.errors) {
+      if (res.ok && !responseData?.errors) {
         setIsSubmitting(false);
         setSubmitted(true);
       } else {
@@ -127,16 +123,16 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-28 px-6 lg:px-12 bg-blue text-white relative overflow-hidden"
+      className="py-20 px-6 lg:px-12 bg-blue text-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto space-y-16">
+      <div className="max-w-7xl mx-auto space-y-10">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-white/20 pb-4">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-xs font-bold text-ink uppercase tracking-widest bg-mango px-3.5 py-1.5 rounded-full border border-mango/40 shadow-subtle">
+            <span className="font-mono text-xs font-bold text-blue-dark uppercase tracking-widest bg-sky px-3.5 py-1.5 rounded-full border border-blue/20 shadow-subtle">
               08 / CONTACT
             </span>
-            <span className="h-1 w-12 bg-mango rounded-full" />
+            <span className="h-1 w-12 bg-sky rounded-full" />
           </div>
           <span className="font-mono text-xs font-bold text-white/80">
             GET IN TOUCH
@@ -145,12 +141,12 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* LEFT: Info Column */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-3">
               <h2 className="heading-contact font-black text-white tracking-tight">
                 LET&apos;S BUILD{" "}
                 <span className="block">SOMETHING </span>
-                <span className="text-mango">USEFUL.</span>
+                <span className="text-sky">USEFUL.</span>
               </h2>
               <p className="text-base text-white/90 leading-relaxed font-medium">
                 Have a product, enterprise system, or engineering project in
@@ -161,8 +157,8 @@ export default function Contact() {
             {/* Availability Status */}
             <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center gap-3 shadow-subtle">
               <span className="relative flex h-3.5 w-3.5 shrink-0" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-mango opacity-75" />
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-mango" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky opacity-75" />
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-sky" />
               </span>
               <div>
                 <p className="text-xs font-mono font-bold text-white">
@@ -176,13 +172,13 @@ export default function Contact() {
 
             {/* Direct Email */}
             <div className="space-y-2">
-              <span className="text-xs font-mono text-mango uppercase tracking-wider block font-bold">
+              <span className="text-xs font-mono text-sky uppercase tracking-wider block font-bold">
                 DIRECT EMAIL:
               </span>
               <div className="flex items-center gap-2 flex-wrap">
                 <a
                   href={`mailto:${email}`}
-                  className="text-base sm:text-lg font-extrabold text-white hover:text-mango transition-colors font-mono underline underline-offset-4 break-all"
+                  className="text-base sm:text-lg font-extrabold text-white hover:text-sky transition-colors font-mono underline underline-offset-4 break-all"
                 >
                   {email}
                 </a>
@@ -193,7 +189,7 @@ export default function Contact() {
                   aria-label="Copy email address to clipboard"
                 >
                   {copiedEmail ? (
-                    <Check size={16} className="text-mango" />
+                    <Check size={16} className="text-sky" />
                   ) : (
                     <Copy size={16} />
                   )}
@@ -203,7 +199,7 @@ export default function Contact() {
 
             {/* Social Links */}
             <div className="space-y-3 pt-2">
-              <span className="text-xs font-mono text-mango uppercase tracking-wider block font-bold">
+              <span className="text-xs font-mono text-sky uppercase tracking-wider block font-bold">
                 CONNECT &amp; PROFILES:
               </span>
               <div className="flex gap-4 flex-wrap">
@@ -214,7 +210,7 @@ export default function Contact() {
                   aria-label="LinkedIn Profile"
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white shadow-subtle transition-all"
                 >
-                  <Linkedin size={16} className="text-mango" aria-hidden="true" />
+                  <Linkedin size={16} className="text-sky" aria-hidden="true" />
                   LinkedIn
                 </a>
                 <a
@@ -224,7 +220,7 @@ export default function Contact() {
                   aria-label="GitHub Profile"
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white shadow-subtle transition-all"
                 >
-                  <Github size={16} className="text-mango" aria-hidden="true" />
+                  <Github size={16} className="text-sky" aria-hidden="true" />
                   GitHub
                 </a>
               </div>
@@ -232,7 +228,7 @@ export default function Contact() {
           </div>
 
           {/* RIGHT: Form */}
-          <div className="lg:col-span-7 bg-vanilla p-8 sm:p-10 rounded-3xl border-2 border-white/20 shadow-poster text-ink">
+          <div className="lg:col-span-7 bg-white/95 p-6 sm:p-7 rounded-3xl border border-white/60 shadow-poster text-ink backdrop-blur-sm">
             <AnimatePresence mode="wait">
               {/* === SUCCESS STATE === */}
               {submitted ? (
@@ -243,7 +239,7 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                   className="py-12 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-full bg-mango/30 text-mango-dark flex items-center justify-center mx-auto border border-mango/50">
+                  <div className="w-16 h-16 rounded-full bg-sky text-blue flex items-center justify-center mx-auto border border-blue/20">
                     <CheckCircle2 size={36} aria-hidden="true" />
                   </div>
                   <h3 className="text-2xl font-black text-ink">
@@ -272,35 +268,12 @@ export default function Contact() {
                   </button>
                 </motion.div>
               ) : (
-                /* === UNAVAILABLE STATE (no Formspree configured) === */
-                !formspreeEndpoint ? (
-                  <motion.div
-                    key="unavailable"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="py-10 text-center space-y-4"
-                  >
-                    <div className="w-14 h-14 rounded-full bg-coral/20 text-coral flex items-center justify-center mx-auto border border-coral/30">
-                      <Mail size={28} aria-hidden="true" />
-                    </div>
-                    <p className="text-base font-bold text-ink">
-                      Contact form is temporarily unavailable.
-                    </p>
-                    <a
-                      href={`mailto:${email}`}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-xl text-xs font-bold font-mono hover:bg-ink transition-colors"
-                    >
-                      <span>Email me directly</span>
-                      <ArrowUpRight size={14} aria-hidden="true" />
-                    </a>
-                  </motion.div>
-                ) : (
-                  /* === FORM STATE === */
+                /* === FORM STATE === */
                   <motion.form
                     key="form"
                     onSubmit={handleSubmit}
                     noValidate
-                    className="space-y-6"
+                    className="space-y-4"
                   >
                     {/* Honeypot — hidden from real users */}
                     <input
@@ -324,7 +297,7 @@ export default function Contact() {
                       <legend className="text-xs font-mono font-bold text-ink/70 uppercase tracking-wider block">
                         What would you like to discuss?
                       </legend>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1">
                         {[
                           "Full-Stack Project",
                           "Mobile App",
@@ -339,10 +312,10 @@ export default function Contact() {
                               setFormData({ ...formData, topic: t })
                             }
                             aria-pressed={formData.topic === t}
-                            className={`py-2 px-3 rounded-xl text-xs font-bold border transition-colors ${
+                            className={`py-2 px-2 rounded-xl text-[11px] font-bold border transition-all ${
                               formData.topic === t
                                 ? "bg-blue text-white border-blue shadow-subtle"
-                                : "bg-white text-ink/80 border-ink/15 hover:border-blue"
+                                : "bg-sky/40 text-ink/80 border-blue/15 hover:border-blue"
                             }`}
                           >
                             {t}
@@ -351,6 +324,7 @@ export default function Contact() {
                       </div>
                     </fieldset>
 
+                    <div className="grid sm:grid-cols-2 gap-4">
                     {/* Name Input */}
                     <div className="space-y-1">
                       <label
@@ -374,7 +348,7 @@ export default function Contact() {
                         aria-describedby={
                           errors.name ? "name-error" : undefined
                         }
-                        className="w-full px-3 py-3 bg-white border-2 border-ink/15 focus:border-blue focus:outline-none text-sm text-ink font-medium rounded-xl transition-colors"
+                        className="w-full px-3 py-2.5 bg-white border border-ink/15 focus:border-blue focus:ring-2 focus:ring-sky focus:outline-none text-sm text-ink font-medium rounded-xl transition-all"
                         placeholder="Md Nafis Al Safayet"
                       />
                       {errors.name && (
@@ -410,7 +384,7 @@ export default function Contact() {
                         aria-describedby={
                           errors.email ? "email-error" : undefined
                         }
-                        className="w-full px-3 py-3 bg-white border-2 border-ink/15 focus:border-blue focus:outline-none text-sm text-ink font-medium rounded-xl transition-colors"
+                        className="w-full px-3 py-2.5 bg-white border border-ink/15 focus:border-blue focus:ring-2 focus:ring-sky focus:outline-none text-sm text-ink font-medium rounded-xl transition-all"
                         placeholder="you@example.com"
                       />
                       {errors.email && (
@@ -422,6 +396,7 @@ export default function Contact() {
                           {errors.email}
                         </p>
                       )}
+                    </div>
                     </div>
 
                     {/* Subject Input */}
@@ -446,7 +421,7 @@ export default function Contact() {
                         aria-describedby={
                           errors.subject ? "subject-error" : undefined
                         }
-                        className="w-full px-3 py-3 bg-white border-2 border-ink/15 focus:border-blue focus:outline-none text-sm text-ink font-medium rounded-xl transition-colors"
+                        className="w-full px-3 py-2.5 bg-white border border-ink/15 focus:border-blue focus:ring-2 focus:ring-sky focus:outline-none text-sm text-ink font-medium rounded-xl transition-all"
                         placeholder="Project inquiry, collaboration..."
                       />
                       {errors.subject && (
@@ -471,7 +446,7 @@ export default function Contact() {
                       <textarea
                         id="contact-message"
                         name="message"
-                        rows={5}
+                        rows={4}
                         required
                         maxLength={MAX_MESSAGE_LENGTH}
                         value={formData.message}
@@ -480,7 +455,7 @@ export default function Contact() {
                         }
                         aria-invalid={!!errors.message}
                         aria-describedby="message-counter message-error"
-                        className="w-full px-3 py-3 bg-white border-2 border-ink/15 focus:border-blue focus:outline-none text-sm text-ink font-medium rounded-xl transition-colors resize-none"
+                        className="w-full px-3 py-2.5 bg-white border border-ink/15 focus:border-blue focus:ring-2 focus:ring-sky focus:outline-none text-sm text-ink font-medium rounded-xl transition-all resize-none"
                         placeholder="Tell me about your project, goals, or requirements..."
                       />
                       <div className="flex justify-between items-center">
@@ -535,7 +510,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 bg-mango text-ink hover:bg-mango-dark disabled:opacity-60 disabled:cursor-not-allowed text-xs font-extrabold uppercase tracking-widest rounded-xl shadow-poster transition-all duration-300 flex items-center justify-center gap-2 group"
+                      className="w-full py-3.5 bg-blue text-white hover:bg-blue-dark disabled:opacity-60 disabled:cursor-not-allowed text-xs font-extrabold uppercase tracking-widest rounded-xl shadow-card transition-all duration-300 flex items-center justify-center gap-2 group"
                     >
                       {isSubmitting ? (
                         <span className="font-mono animate-pulse">
@@ -553,7 +528,6 @@ export default function Contact() {
                       )}
                     </button>
                   </motion.form>
-                )
               )}
             </AnimatePresence>
           </div>

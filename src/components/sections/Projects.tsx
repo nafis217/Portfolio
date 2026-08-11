@@ -78,28 +78,39 @@ export default function Projects() {
   const targetRef = useRef<HTMLDivElement>(null);
   const flexContainerRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
+  const [scrollSectionHeight, setScrollSectionHeight] = useState("420vh");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const projects = PORTFOLIO_DATA.projects;
   const activeProject = projects[activeIndex] || projects[0];
   const activeColors = PROJECT_COLOR_WORLDS[activeProject.id] || PROJECT_COLOR_WORLDS["igloo-oms"];
 
-  // Dynamically calculate exact pixel scroll range (total scrollable width - window viewport width)
+  // Keep the vertical travel in sync with the real horizontal distance. A
+  // ResizeObserver also catches late font/image layout changes, not just window
+  // resizes.
   useEffect(() => {
     const calculateRange = () => {
       if (flexContainerRef.current) {
         const totalWidth = flexContainerRef.current.scrollWidth;
         const viewportWidth = window.innerWidth;
-        setScrollRange(Math.max(0, totalWidth - viewportWidth));
+        const nextRange = Math.max(0, totalWidth - viewportWidth);
+        setScrollRange(nextRange);
+        // A small end buffer keeps the final card fully readable before the
+        // sticky section releases into the next section.
+        setScrollSectionHeight(`${nextRange + window.innerHeight * 1.2}px`);
       }
     };
 
     calculateRange();
     window.addEventListener("resize", calculateRange);
-    const timeout = setTimeout(calculateRange, 500);
+    const resizeObserver = new ResizeObserver(calculateRange);
+    if (flexContainerRef.current) {
+      resizeObserver.observe(flexContainerRef.current);
+    }
+
     return () => {
       window.removeEventListener("resize", calculateRange);
-      clearTimeout(timeout);
+      resizeObserver.disconnect();
     };
   }, [projects.length]);
 
@@ -123,7 +134,9 @@ export default function Projects() {
   );
 
   // Dynamic pixel transform for 100% pixel-perfect horizontal scroll
-  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
+  // Finish the horizontal movement slightly before the sticky section ends.
+  // The remaining progress acts as a calm reading pause on the final card.
+  const x = useTransform(scrollYProgress, [0, 0.94, 1], [0, -scrollRange, -scrollRange]);
 
   // Smoothly update active index for active card badges and text states
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -142,7 +155,7 @@ export default function Projects() {
     <motion.section
       id="projects"
       style={{ backgroundColor }}
-      className="relative border-t border-ink/10 transition-colors duration-700 overflow-hidden"
+      className="project-scroll-section relative border-t border-ink/10 transition-colors duration-700"
     >
       {/* Section Header (Fixed Top) */}
       <div className="pt-24 pb-8 px-6 lg:px-12 max-w-7xl mx-auto space-y-4 relative z-10">
@@ -185,7 +198,11 @@ export default function Projects() {
       </div>
 
       {/* DESKTOP STICKY HORIZONTAL SCROLL VIEWPORT */}
-      <div ref={targetRef} className="hidden lg:block relative h-[420vh]">
+      <div
+        ref={targetRef}
+        style={{ height: scrollSectionHeight }}
+        className="hidden lg:block relative"
+      >
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
           <motion.div
             ref={flexContainerRef}
@@ -220,7 +237,7 @@ function ProjectPosterCardDesktop({ project, isActive }: { project: Project; isA
   return (
     <div
       style={{ backgroundColor: colors.surface, borderColor: isActive ? colors.accent : "rgba(23, 36, 50, 0.12)" }}
-      className={`w-[75vw] max-w-5xl h-[72vh] rounded-3xl border-2 shadow-poster flex flex-col justify-between p-8 sm:p-10 shrink-0 relative overflow-hidden group transition-all duration-500 ${
+      className={`w-[75vw] max-w-5xl h-[82vh] max-h-[780px] rounded-3xl border-2 shadow-poster flex flex-col justify-between p-6 xl:p-8 shrink-0 relative overflow-hidden group transition-[transform,opacity,border-color,box-shadow] duration-500 ease-out ${
         isActive ? "scale-100 opacity-100 shadow-glow" : "scale-[0.97] opacity-85"
       }`}
     >
@@ -251,9 +268,9 @@ function ProjectPosterCardDesktop({ project, isActive }: { project: Project; isA
       </div>
 
       {/* Main Asymmetric Grid Composition */}
-      <div className="grid grid-cols-12 gap-8 my-auto items-center relative z-10">
+      <div className="grid grid-cols-12 gap-6 my-auto items-center relative z-10 min-h-0">
         {/* Left Info Column (5 cols) */}
-        <div className="col-span-5 space-y-3.5">
+        <div className="col-span-5 space-y-2.5">
           <div>
             <span style={{ color: colors.accent }} className="font-mono text-xs font-bold uppercase tracking-wider block mb-1">
               {project.subtitle}
@@ -268,7 +285,7 @@ function ProjectPosterCardDesktop({ project, isActive }: { project: Project; isA
           </p>
 
           {/* Highlights checklist */}
-          <ul className="space-y-1.5 pt-1">
+          <ul className="space-y-1 pt-0.5">
             {project.highlights.slice(0, 3).map((hl, i) => (
               <li key={i} style={{ color: colors.darkText }} className="flex items-start gap-2 text-xs font-semibold">
                 <CheckCircle2 size={15} style={{ color: colors.accent }} className="shrink-0 mt-0.5" />
@@ -278,7 +295,7 @@ function ProjectPosterCardDesktop({ project, isActive }: { project: Project; isA
           </ul>
 
           {/* Tech Stack Pills */}
-          <div className="pt-2">
+          <div className="pt-1">
             <div className="flex flex-wrap gap-1.5">
               {project.tech.map((t) => (
                 <span
@@ -294,33 +311,29 @@ function ProjectPosterCardDesktop({ project, isActive }: { project: Project; isA
         </div>
 
         {/* Right Large Product Visual Mockup (7 cols) */}
-        <div className="col-span-7 relative h-64 sm:h-76 rounded-2xl overflow-hidden border-2 border-ink/10 shadow-poster group-hover:scale-[1.02] transition-transform duration-500 bg-white">
+        <div className="col-span-7 relative h-[clamp(12rem,30vh,19rem)] rounded-2xl overflow-hidden border-2 border-ink/10 shadow-poster group-hover:scale-[1.02] transition-transform duration-500 bg-white">
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover"
+            sizes="(min-width: 1024px) 52vw, 100vw"
+            className={project.id === "my-salon" ? "object-cover" : "object-contain p-3"}
           />
         </div>
       </div>
 
       {/* Bottom Action Bar */}
-      <div className="flex justify-between items-center border-t border-ink/10 pt-4 relative z-10">
-        <div style={{ color: colors.darkText }} className="text-xs font-mono opacity-80">
-          ROLE: <span style={{ color: colors.accent }} className="font-extrabold">{project.role}</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ backgroundColor: colors.btnBg, color: colors.btnText }}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl shadow-poster hover:scale-105 transition-all font-mono group"
-          >
-            <span>VIEW CASE</span>
-            <ArrowUpRight size={16} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </a>
-        </div>
+      <div className="flex justify-end items-center pt-2 relative z-10">
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ backgroundColor: colors.btnBg, color: colors.btnText }}
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl shadow-poster hover:scale-105 transition-all font-mono group"
+        >
+          <span>VIEW CASE</span>
+          <ArrowUpRight size={16} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        </a>
       </div>
     </div>
   );
@@ -348,7 +361,13 @@ function ProjectPosterCardMobile({ project }: { project: Project }) {
       </div>
 
       <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-ink/10 shadow-subtle bg-white">
-        <Image src={project.image} alt={project.title} fill className="object-cover" />
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 1023px) 100vw, 50vw"
+          className={project.id === "my-salon" ? "object-cover" : "object-contain p-2"}
+        />
       </div>
 
       <div className="space-y-2">
@@ -374,8 +393,7 @@ function ProjectPosterCardMobile({ project }: { project: Project }) {
         ))}
       </div>
 
-      <div className="pt-4 border-t border-ink/10 flex justify-between items-center">
-        <span style={{ color: colors.darkText }} className="text-[11px] font-mono opacity-80 font-bold">ROLE: {project.role}</span>
+      <div className="pt-2 flex justify-end items-center">
         <a
           href={project.githubUrl}
           target="_blank"

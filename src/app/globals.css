@@ -30,11 +30,11 @@
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   ::selection {
@@ -82,6 +82,13 @@
   background: rgba(205, 234, 244, 0.90);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+/* Clip the horizontal project track without creating a scroll container.
+   Using overflow: hidden here prevents the nested sticky viewport from
+   sticking in WebKit/Blink browsers. */
+.project-scroll-section {
+  overflow-x: clip;
 }
 
 /* Floating label inputs */

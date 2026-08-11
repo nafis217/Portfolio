@@ -9,7 +9,6 @@ import {
   Linkedin,
   Github,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 
@@ -43,40 +42,12 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Architectural Corner Marks */}
-      <div
-        aria-hidden="true"
-        className="absolute top-24 left-8 text-blue/60 font-mono text-xs font-bold hidden lg:flex items-center gap-1"
-      >
-        <Sparkles size={14} className="text-coral" />
-        <span>+ 01.00 // HERO_VIEWPORT</span>
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute top-24 right-8 text-blue/60 font-mono text-xs font-bold hidden lg:block"
-      >
-        SYS_STATUS: ONLINE +
-      </div>
-
       <div className="max-w-7xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         {/* LEFT COLUMN (~55% – 7 cols) */}
         <motion.div
           style={{ y: textY, opacity }}
           className="lg:col-span-7 flex flex-col justify-center space-y-6 lg:pr-6"
         >
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-3"
-          >
-            <span className="h-1 w-10 bg-coral rounded-full" />
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-ink bg-white/80 backdrop-blur-md px-3.5 py-1 rounded-full border border-blue/20 shadow-subtle">
-              HELLO — I&apos;M NAFIS
-            </span>
-          </motion.div>
-
           {/* Main Title — clamp() responsive size */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -125,7 +96,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-base sm:text-lg text-ink/80 max-w-2xl leading-relaxed font-medium"
           >
-            {personal.bio}
+            I turn complex ideas and business workflows into polished, reliable
+            digital products built for people, performance, and scale.
           </motion.p>
 
           {/* CTA Buttons & Action Row */}
@@ -217,11 +189,6 @@ export default function Hero() {
           className="lg:col-span-5 relative flex justify-center lg:justify-end"
         >
           <div className="relative w-full max-w-sm sm:max-w-md">
-            {/* Mango geometric back panel */}
-            <div
-              aria-hidden="true"
-              className="absolute -top-6 -left-6 w-3/4 h-3/4 rounded-3xl bg-mango opacity-90 transform -rotate-6 pointer-events-none shadow-subtle"
-            />
             {/* Strawberry pink accent circle */}
             <div
               aria-hidden="true"

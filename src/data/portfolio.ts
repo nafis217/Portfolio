@@ -71,11 +71,11 @@ export const PORTFOLIO_DATA = {
     social: {
       linkedin: "https://www.linkedin.com/in/md-nafis-al-safayet-040569322/",
       github: "https://github.com/nafis217",
-      email: "nafisalsafayet23@gmail.com",
+      email: "nafisalsafayet7@gmail.com",
     },
     // Set to null if no real PDF exists — Hero will hide the Resume button
     resumeUrl: null as string | null,
-    portraitImage: "/images/nafis-portrait.png",
+    portraitImage: "/images/nafis-portrait.jpg",
   },
 
   experiences: [
@@ -84,7 +84,7 @@ export const PORTFOLIO_DATA = {
       company: "IGLOO ICE CREAM",
       role: "Software Engineer",
       subtitle: "Management Information Systems (MIS)",
-      date: "2026 — PRESENT",
+      date: "JUNE 2026 — PRESENT",
       location: "Dhaka, Bangladesh",
       category: "Enterprise Software & Systems",
       logo: "/experience/igloo-icecream.png",
@@ -106,7 +106,7 @@ export const PORTFOLIO_DATA = {
       id: "clicko",
       company: "CLICKO DIGITAL",
       role: "Junior Software Engineer",
-      date: "2024 — 2025",
+      date: "JULY 2025 — JUNE 2026",
       location: "Dhaka, Bangladesh",
       category: "Web & Mobile Engineering",
       logo: "/experience/clicko-digital.png",
@@ -115,6 +115,8 @@ export const PORTFOLIO_DATA = {
         "TypeScript",
         "React",
         "Node.js",
+        "Shopify",
+        "Liquid",
         "Tailwind CSS",
         "RESTful APIs",
       ],
@@ -223,7 +225,7 @@ export const PORTFOLIO_DATA = {
       category: "SaaS & Marketplace Platform",
       year: "2025",
       githubUrl: "https://github.com/nafis217/My-salon",
-      image: "/projects/my-salon.svg",
+      image: "/projects/my-salon-github-optimized.jpg",
     },
     {
       id: "iglootrack",
@@ -275,7 +277,7 @@ export const PORTFOLIO_DATA = {
       year: "2024",
       githubUrl:
         "https://github.com/nafis217/Fake-News-Detection-using-NLP-and-BERT",
-      image: "/projects/fake-news.svg",
+      image: "/projects/fake-news-github.png",
     },
     {
       id: "gesture-automation",
@@ -301,7 +303,7 @@ export const PORTFOLIO_DATA = {
       year: "2024",
       githubUrl:
         "https://github.com/nafis217/Hand-Gesture-Home-Automation-System",
-      image: "/projects/gesture-automation.svg",
+      image: "/projects/gesture-automation-github.png",
     },
   ] as Project[],
 
@@ -454,7 +456,7 @@ export const PORTFOLIO_DATA = {
     field: "Computer Science and Engineering",
     location: "Rourkela, Odisha, India",
     logo: "/images/nit-rourkela-logo.jpg",
-    bannerImage: "/images/nit-rourkela.jpg",
+    bannerImage: "/images/nit-rourkela-campus.jpg",
     details: [
       "Completed a rigorous B.Tech program in Computer Science and Engineering at one of India's premier technical institutes.",
       "Studied core computing disciplines including Data Structures & Algorithms, Operating Systems, Database Management Systems, Computer Networks, and Software Engineering.",

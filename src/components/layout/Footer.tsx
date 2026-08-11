@@ -24,12 +24,9 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 border-b border-white/10 pb-16">
           {/* Left Brand info */}
           <div className="space-y-4 max-w-md">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-mango text-ink font-bold shadow-subtle">
-                {PORTFOLIO_DATA.personal.monogram}
-              </span>
+            <div>
               <span className="font-display text-xl font-bold tracking-tight text-white">
-                Md Nafis Al Safayet
+                {PORTFOLIO_DATA.personal.name}
               </span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed font-medium">

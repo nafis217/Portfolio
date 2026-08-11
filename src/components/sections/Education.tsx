@@ -47,7 +47,6 @@ export default function Education() {
                 src={edu.bannerImage || ""}
                 alt="Nafis at NIT Rourkela"
                 fill
-                priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 450px"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
@@ -57,7 +56,7 @@ export default function Education() {
             {/* Top Bar with Official NIT Rourkela Logo */}
             <div className="relative z-10 flex justify-between items-start">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-mango font-mono text-xs uppercase tracking-wider font-extrabold drop-shadow-sm">
+                <div className="flex items-center gap-2 text-white font-mono text-xs uppercase tracking-wider font-extrabold drop-shadow-sm">
                   <GraduationCap size={18} />
                   <span>PREMIER TECHNICAL INSTITUTE</span>
                 </div>
@@ -75,18 +74,18 @@ export default function Education() {
             </div>
 
             {/* Title & Location */}
-            <div className="relative z-10 space-y-2 pt-16">
+            <div className="relative z-10 mt-auto space-y-2 pt-10">
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
                 NIT ROURKELA
               </h3>
-              <p className="text-xs font-mono text-mango font-bold drop-shadow-sm">
+              <p className="text-xs font-mono text-white/90 font-bold drop-shadow-sm">
                 {edu.location}
               </p>
             </div>
 
             <div className="relative z-10 pt-8 border-t border-white/25 flex justify-between items-center text-xs font-mono text-white font-bold drop-shadow-sm">
               <span>FACULTY OF ENGINEERING</span>
-              <span className="text-mango font-black">INDIA</span>
+              <span className="text-white font-black">INDIA</span>
             </div>
           </motion.div>
 
