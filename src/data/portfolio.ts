@@ -53,6 +53,9 @@ export interface SecondaryEducation {
   details: string[];
 }
 
+const assetPath = (path: string) =>
+  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 export const PORTFOLIO_DATA = {
   personal: {
     name: "Md Nafis Al Safayet",
@@ -74,7 +77,7 @@ export const PORTFOLIO_DATA = {
     },
     // Set to null if no real PDF exists — Hero will hide the Resume button
     resumeUrl: null as string | null,
-    portraitImage: "/images/nafis-portrait.jpg",
+    portraitImage: assetPath("/images/nafis-portrait.jpg"),
   },
 
   experiences: [
@@ -86,7 +89,7 @@ export const PORTFOLIO_DATA = {
       date: "JUNE 2026 — PRESENT",
       location: "Dhaka, Bangladesh",
       category: "Enterprise Software & Systems",
-      logo: "/experience/igloo-icecream.png",
+      logo: assetPath("/experience/igloo-icecream.png"),
       technologies: [
         "ASP.NET Core",
         "SQL Server",
@@ -108,7 +111,7 @@ export const PORTFOLIO_DATA = {
       date: "JULY 2025 — JUNE 2026",
       location: "Dhaka, Bangladesh",
       category: "Web & Mobile Engineering",
-      logo: "/experience/clicko-digital.png",
+      logo: assetPath("/experience/clicko-digital.png"),
       technologies: [
         "JavaScript",
         "TypeScript",
@@ -132,7 +135,7 @@ export const PORTFOLIO_DATA = {
       date: "MAY 2024 – JULY 2024",
       location: "Remote",
       category: "Full-Stack Development",
-      logo: "/experience/technocolabs.svg",
+      logo: assetPath("/experience/technocolabs.svg"),
       technologies: ["Python", "JavaScript", "HTML/CSS", "Git", "REST APIs"],
       responsibilities: [
         "Participated in full-stack software development workflows, implementing features and resolving bugs.",
@@ -167,7 +170,7 @@ export const PORTFOLIO_DATA = {
       category: "Enterprise OMS & Logistics",
       year: "2026",
       githubUrl: "https://github.com/nafis217/Igloo_OMS",
-      image: "/projects/igloo-oms.svg",
+      image: assetPath("/projects/igloo-oms.svg"),
     },
     {
       id: "nafis-agro",
@@ -194,7 +197,7 @@ export const PORTFOLIO_DATA = {
       category: "Agri-Tech & Supply Chain",
       year: "2025",
       githubUrl: "https://github.com/nafis217/Nafis_Agro",
-      image: "/projects/nafis-agro.svg",
+      image: assetPath("/projects/nafis-agro.svg"),
     },
     {
       id: "my-salon",
@@ -224,7 +227,7 @@ export const PORTFOLIO_DATA = {
       category: "SaaS & Marketplace Platform",
       year: "2025",
       githubUrl: "https://github.com/nafis217/My-salon",
-      image: "/projects/my-salon-github-optimized.jpg",
+      image: assetPath("/projects/my-salon-github-optimized.jpg"),
     },
     {
       id: "iglootrack",
@@ -249,7 +252,7 @@ export const PORTFOLIO_DATA = {
       category: "IoT & Enterprise Asset Management",
       year: "2026",
       githubUrl: "https://github.com/nafis217/igloo_fridge_tracking",
-      image: "/projects/iglootrack.svg",
+      image: assetPath("/projects/iglootrack.svg"),
     },
     {
       id: "fake-news",
@@ -276,7 +279,7 @@ export const PORTFOLIO_DATA = {
       year: "2024",
       githubUrl:
         "https://github.com/nafis217/Fake-News-Detection-using-NLP-and-BERT",
-      image: "/projects/fake-news-github.png",
+      image: assetPath("/projects/fake-news-github.png"),
     },
     {
       id: "gesture-automation",
@@ -302,7 +305,7 @@ export const PORTFOLIO_DATA = {
       year: "2024",
       githubUrl:
         "https://github.com/nafis217/Hand-Gesture-Home-Automation-System",
-      image: "/projects/gesture-automation-github.png",
+      image: assetPath("/projects/gesture-automation-github.png"),
     },
   ] as Project[],
 
@@ -454,8 +457,8 @@ export const PORTFOLIO_DATA = {
     degree: "Bachelor of Technology",
     field: "Computer Science and Engineering",
     location: "Rourkela, Odisha, India",
-    logo: "/images/nit-rourkela-logo.jpg",
-    bannerImage: "/images/nit-rourkela-campus.jpg",
+    logo: assetPath("/images/nit-rourkela-logo.jpg"),
+    bannerImage: assetPath("/images/nit-rourkela-campus.jpg"),
     details: [
       "Completed a rigorous B.Tech program in Computer Science and Engineering at one of India's premier technical institutes.",
       "Studied core computing disciplines including Data Structures & Algorithms, Operating Systems, Database Management Systems, Computer Networks, and Software Engineering.",
@@ -467,7 +470,7 @@ export const PORTFOLIO_DATA = {
         degree: "Higher Secondary Certificate (HSC)",
         field: "Science",
         location: "Dhaka, Bangladesh",
-        logo: "/images/bnmpc-logo.jpg",
+        logo: assetPath("/images/bnmpc-logo.jpg"),
         details: [
           "Completed the Higher Secondary Science curriculum with distinction in Physics, Chemistry, and Higher Mathematics.",
         ],
@@ -477,7 +480,7 @@ export const PORTFOLIO_DATA = {
         degree: "Secondary School Certificate (SSC)",
         field: "Science",
         location: "Rangpur, Bangladesh",
-        logo: "/images/rangpur-zilla-school-logo.png",
+        logo: assetPath("/images/rangpur-zilla-school-logo.png"),
         details: [
           "Completed the Secondary School Science curriculum from one of Bangladesh's historic premier institutions.",
         ],

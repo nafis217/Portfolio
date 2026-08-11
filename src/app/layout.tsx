@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nafis217.github.io"),
+  metadataBase: new URL("https://nafis217.github.io/Portfolio/"),
   title: `${PORTFOLIO_DATA.personal.name} | ${PORTFOLIO_DATA.personal.role}`,
   description: `${PORTFOLIO_DATA.personal.role} building modern web, mobile and enterprise applications in ${PORTFOLIO_DATA.personal.location}.`,
   keywords: [
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nafis217.github.io",
+    url: "https://nafis217.github.io/Portfolio/",
     title: `${PORTFOLIO_DATA.personal.name} | ${PORTFOLIO_DATA.personal.role}`,
     description: PORTFOLIO_DATA.personal.bio,
     siteName: `${PORTFOLIO_DATA.personal.name} Portfolio`,
     images: [
       {
-        url: "/images/nafis-portrait.png",
+        url: "/Portfolio/images/nafis-portrait.jpg",
         width: 800,
         height: 1000,
         alt: PORTFOLIO_DATA.personal.name,
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${PORTFOLIO_DATA.personal.name} | ${PORTFOLIO_DATA.personal.role}`,
     description: PORTFOLIO_DATA.personal.bio,
-    images: ["/images/nafis-portrait.png"],
+    images: ["/Portfolio/images/nafis-portrait.jpg"],
   },
   robots: {
     index: true,
