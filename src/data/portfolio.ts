@@ -54,7 +54,7 @@ export interface SecondaryEducation {
 }
 
 const assetPath = (path: string) =>
-  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+  `${process.env.NEXT_PUBLIC_BASE_PATH ?? (process.env.NODE_ENV === "production" ? "/Portfolio" : "")}${path}`;
 
 export const PORTFOLIO_DATA = {
   personal: {
