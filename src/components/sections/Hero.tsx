@@ -30,7 +30,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="hero"
-      className="relative min-h-[92vh] lg:min-h-screen flex items-center pt-28 pb-16 px-6 lg:px-12 bg-sky overflow-hidden bg-grid-pattern"
+      className="relative min-h-0 sm:min-h-[92svh] lg:min-h-screen flex items-center pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-12 bg-sky overflow-hidden bg-grid-pattern"
     >
       {/* Background oversized faded "N" watermark */}
       <div
@@ -42,11 +42,11 @@ export default function Hero() {
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 items-center">
         {/* LEFT COLUMN (~55% – 7 cols) */}
         <motion.div
           style={{ y: textY, opacity }}
-          className="lg:col-span-7 flex flex-col justify-center space-y-6 lg:pr-6"
+          className="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-6 lg:pr-6"
         >
           {/* Main Title — clamp() responsive size */}
           <motion.div
@@ -105,12 +105,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6"
+            className="pt-2 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4"
           >
             {/* View My Work */}
             <Link
               href="#projects"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-ink text-white hover:bg-blue text-xs font-bold uppercase tracking-wider rounded-xl shadow-poster transition-all duration-300 transform hover:-translate-y-0.5 group"
+              className="inline-flex min-h-11 w-full sm:w-auto justify-center items-center gap-2 px-6 py-3.5 bg-ink text-white hover:bg-blue text-xs font-bold uppercase tracking-wider rounded-xl shadow-poster transition-all duration-300 transform hover:-translate-y-0.5 group"
             >
               <span>View My Work</span>
               <ArrowDownRight
@@ -134,7 +134,7 @@ export default function Hero() {
             {/* Secondary Let's Talk Link */}
             <Link
               href="#contact"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue hover:text-coral transition-colors py-2 group font-mono"
+              className="inline-flex min-h-11 w-full sm:w-auto justify-center items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue hover:text-coral transition-colors py-2 group font-mono"
             >
               <span>Let&apos;s Talk</span>
               <ArrowRight
@@ -149,7 +149,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="pt-4 flex items-center gap-4 text-xs text-ink/75"
+            className="hidden lg:flex pt-4 items-center gap-4 text-xs text-ink/75"
           >
             <span className="font-mono text-[11px] uppercase tracking-wider text-ink/60 font-bold">
               Connect:
@@ -188,7 +188,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="lg:col-span-5 relative flex justify-center lg:justify-end"
         >
-          <div className="relative w-full max-w-sm sm:max-w-md">
+          <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none">
             {/* Strawberry pink accent circle */}
             <div
               aria-hidden="true"
@@ -241,6 +241,33 @@ export default function Hero() {
                   SOFTWARE ENGINEER
                 </span>
               </div>
+            </div>
+
+            <div className="lg:hidden pt-7 flex items-center justify-center gap-4 text-xs text-ink/75">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-ink/60 font-bold">
+                Connect:
+              </span>
+              <a
+                href={personal.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="flex items-center gap-1.5 hover:text-coral transition-colors font-bold text-ink"
+              >
+                <Linkedin size={15} className="text-blue" />
+                <span>LinkedIn</span>
+              </a>
+              <span className="text-blue/30" aria-hidden="true">•</span>
+              <a
+                href={personal.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="flex items-center gap-1.5 hover:text-coral transition-colors font-bold text-ink"
+              >
+                <Github size={15} className="text-blue" />
+                <span>GitHub</span>
+              </a>
             </div>
           </div>
         </motion.div>

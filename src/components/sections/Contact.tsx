@@ -123,7 +123,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-6 lg:px-12 bg-blue text-white relative overflow-hidden"
+      className="py-16 sm:py-20 px-4 sm:px-6 lg:px-12 bg-blue text-white relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Header Label */}
@@ -134,7 +134,7 @@ export default function Contact() {
             </span>
             <span className="h-1 w-12 bg-sky rounded-full" />
           </div>
-          <span className="font-mono text-xs font-bold text-white/80">
+          <span className="hidden sm:block font-mono text-xs font-bold text-white/80">
             GET IN TOUCH
           </span>
         </div>
@@ -228,7 +228,7 @@ export default function Contact() {
           </div>
 
           {/* RIGHT: Form */}
-          <div className="lg:col-span-7 bg-white/95 p-6 sm:p-7 rounded-3xl border border-white/60 shadow-poster text-ink backdrop-blur-sm">
+          <div className="lg:col-span-7 bg-white/95 p-5 sm:p-7 rounded-3xl border border-white/60 shadow-poster text-ink backdrop-blur-sm">
             <AnimatePresence mode="wait">
               {/* === SUCCESS STATE === */}
               {submitted ? (

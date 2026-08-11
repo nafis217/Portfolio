@@ -76,28 +76,29 @@ const PROJECT_COLOR_WORLDS: Record<string, ProjectColorWorld> = {
 
 export default function Projects() {
   const targetRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const flexContainerRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
-  const [scrollSectionHeight, setScrollSectionHeight] = useState("420vh");
+  const [scrollSectionHeight, setScrollSectionHeight] = useState("100vh");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const projects = PORTFOLIO_DATA.projects;
   const activeProject = projects[activeIndex] || projects[0];
   const activeColors = PROJECT_COLOR_WORLDS[activeProject.id] || PROJECT_COLOR_WORLDS["igloo-oms"];
 
-  // Keep the vertical travel in sync with the real horizontal distance. A
-  // ResizeObserver also catches late font/image layout changes, not just window
-  // resizes.
+  // The sticky viewport's vertical travel must exactly match the width the
+  // track needs to travel. The section also includes one viewport height for
+  // the sticky frame itself: `section height - viewport height = scrollRange`.
+  // This guarantees the last panel reaches the viewport rather than stopping
+  // short on wider project tracks.
   useEffect(() => {
     const calculateRange = () => {
-      if (flexContainerRef.current) {
+      if (flexContainerRef.current && viewportRef.current) {
         const totalWidth = flexContainerRef.current.scrollWidth;
-        const viewportWidth = window.innerWidth;
+        const viewportWidth = viewportRef.current.clientWidth;
         const nextRange = Math.max(0, totalWidth - viewportWidth);
         setScrollRange(nextRange);
-        // A small end buffer keeps the final card fully readable before the
-        // sticky section releases into the next section.
-        setScrollSectionHeight(`${nextRange + window.innerHeight * 1.2}px`);
+        setScrollSectionHeight(`${nextRange + viewportRef.current.clientHeight}px`);
       }
     };
 
@@ -106,6 +107,9 @@ export default function Projects() {
     const resizeObserver = new ResizeObserver(calculateRange);
     if (flexContainerRef.current) {
       resizeObserver.observe(flexContainerRef.current);
+    }
+    if (viewportRef.current) {
+      resizeObserver.observe(viewportRef.current);
     }
 
     return () => {
@@ -133,10 +137,9 @@ export default function Projects() {
     ]
   );
 
-  // Dynamic pixel transform for 100% pixel-perfect horizontal scroll
-  // Finish the horizontal movement slightly before the sticky section ends.
-  // The remaining progress acts as a calm reading pause on the final card.
-  const x = useTransform(scrollYProgress, [0, 0.94, 1], [0, -scrollRange, -scrollRange]);
+  // Dynamic pixel transform: one pixel of vertical sticky travel maps to one
+  // pixel of horizontal track travel. No hard-coded progress cutoff.
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
 
   // Smoothly update active index for active card badges and text states
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -146,9 +149,9 @@ export default function Projects() {
       totalProjects - 1,
       Math.max(0, Math.floor(latest / step))
     );
-    if (newIdx !== activeIndex) {
-      setActiveIndex(newIdx);
-    }
+    setActiveIndex((currentIndex) =>
+      currentIndex === newIdx ? currentIndex : newIdx
+    );
   });
 
   return (
@@ -158,7 +161,7 @@ export default function Projects() {
       className="project-scroll-section relative border-t border-ink/10 transition-colors duration-700"
     >
       {/* Section Header (Fixed Top) */}
-      <div className="pt-24 pb-8 px-6 lg:px-12 max-w-7xl mx-auto space-y-4 relative z-10">
+      <div className="pt-20 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto space-y-4 relative z-10">
         <div className="flex items-center justify-between border-b border-ink/15 pb-4">
           <div className="flex items-center gap-3">
             <span
@@ -170,7 +173,7 @@ export default function Projects() {
             </span>
             <span style={{ backgroundColor: activeColors.accent }} className="h-1 w-12 rounded-full transition-colors duration-500" />
           </div>
-          <span style={{ color: activeColors.darkText }} className="font-mono text-xs font-bold opacity-80 uppercase tracking-wider transition-colors duration-500">
+          <span style={{ color: activeColors.darkText }} className="hidden sm:block font-mono text-xs font-bold opacity-80 uppercase tracking-wider transition-colors duration-500">
             PROJECT ({activeIndex + 1}/{projects.length})
           </span>
         </div>
@@ -203,7 +206,7 @@ export default function Projects() {
         style={{ height: scrollSectionHeight }}
         className="hidden lg:block relative"
       >
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div ref={viewportRef} className="sticky top-0 h-screen flex items-center overflow-hidden">
           <motion.div
             ref={flexContainerRef}
             style={{ x }}
@@ -221,7 +224,7 @@ export default function Projects() {
       </div>
 
       {/* MOBILE STACKED VERTICAL CONTAINER */}
-      <div className="lg:hidden px-6 pb-24 space-y-12 max-w-2xl mx-auto pt-4">
+      <div className="lg:hidden px-4 sm:px-6 pb-16 sm:pb-24 space-y-8 sm:space-y-12 max-w-2xl mx-auto pt-4">
         {projects.map((project) => (
           <ProjectPosterCardMobile key={project.id} project={project} />
         ))}
@@ -349,7 +352,7 @@ function ProjectPosterCardMobile({ project }: { project: Project }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       style={{ backgroundColor: colors.surface, borderColor: colors.accent }}
-      className="rounded-3xl border-2 p-6 shadow-poster space-y-6"
+      className="rounded-3xl border-2 p-5 sm:p-6 shadow-poster space-y-6"
     >
       <div className="flex justify-between items-center border-b border-ink/10 pb-3">
         <span style={{ color: colors.accent }} className="font-mono text-2xl font-black">

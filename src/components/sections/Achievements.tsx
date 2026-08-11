@@ -21,8 +21,8 @@ const HIGHLIGHT_ICONS: Record<string, React.ElementType> = {
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-28 px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="achievements" className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-ink/15 pb-4">
           <div className="flex items-center gap-3">
@@ -31,7 +31,7 @@ export default function Achievements() {
             </span>
             <span className="h-1 w-12 bg-coral rounded-full" />
           </div>
-          <span className="font-mono text-xs font-bold text-ink/60">
+          <span className="hidden sm:block font-mono text-xs font-bold text-ink/60">
             BEYOND CODE
           </span>
         </div>
@@ -61,7 +61,7 @@ export default function Achievements() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 style={{ backgroundColor: blockStyle.bg, borderColor: blockStyle.border }}
-                className={`p-7 rounded-3xl border-2 shadow-subtle hover:shadow-poster transition-all duration-300 flex flex-col justify-between space-y-6 ${isStaggered} hover:translate-y-0 group`}
+                className={`p-5 sm:p-7 rounded-3xl border-2 shadow-subtle hover:shadow-poster transition-all duration-300 flex flex-col justify-between space-y-6 ${isStaggered} hover:translate-y-0 group`}
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">

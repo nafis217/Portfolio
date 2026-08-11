@@ -50,9 +50,9 @@ export default function Experience() {
       id="experience"
       animate={{ backgroundColor: activeColor.bg }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="py-28 px-6 lg:px-12 border-t border-ink/10 relative transition-colors duration-700"
+      className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-12 border-t border-ink/10 relative transition-colors duration-700"
     >
-      <div className="max-w-7xl mx-auto space-y-16">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-ink/15 pb-4">
           <div className="flex items-center gap-3">
@@ -64,7 +64,7 @@ export default function Experience() {
             </span>
             <span style={{ backgroundColor: activeColor.accent }} className="h-1 w-12 rounded-full transition-colors duration-500" />
           </div>
-          <span className="font-mono text-xs font-bold text-ink/60">
+          <span className="hidden sm:block font-mono text-xs font-bold text-ink/60">
             PROFESSIONAL TIMELINE
           </span>
         </div>
@@ -90,7 +90,7 @@ export default function Experience() {
           </div>
 
           {/* Experience Case-Study Rows */}
-          <div className="space-y-16 relative z-10">
+          <div className="space-y-12 sm:space-y-16 relative z-10">
             {PORTFOLIO_DATA.experiences.map((exp, idx) => {
               const expColors = EXP_COLOR_WORLDS[exp.id] || EXP_COLOR_WORLDS.igloo;
               const isActive = activeExpId === exp.id;
@@ -114,7 +114,7 @@ export default function Experience() {
                   />
 
                   {/* LEFT: Year & Company Badge (md: 4 cols) */}
-                  <div className="md:col-span-4 space-y-3 md:sticky md:top-32">
+                  <div className="md:col-span-4 space-y-3 lg:sticky lg:top-32">
                     <div
                       style={{ color: expColors.accent, backgroundColor: expColors.badgeBg, borderColor: expColors.border }}
                       className="inline-flex items-center gap-2 font-mono text-xs font-bold px-3.5 py-1.5 rounded-lg border shadow-subtle transition-colors duration-300"

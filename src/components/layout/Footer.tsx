@@ -11,7 +11,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-ink text-white relative pt-20 pb-12 px-6 lg:px-12 overflow-hidden border-t border-white/10">
+    <footer className="bg-ink text-white relative pt-16 sm:pt-20 pb-10 sm:pb-12 px-4 sm:px-6 lg:px-12 overflow-hidden border-t border-white/10">
       {/* Large Subtle Background Watermark Text */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.05] whitespace-nowrap z-0">
         <span className="font-display text-[22vw] font-black tracking-tighter text-white leading-none">
@@ -19,7 +19,7 @@ export default function Footer() {
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
         {/* Top Footer Content Row */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 border-b border-white/10 pb-16">
           {/* Left Brand info */}

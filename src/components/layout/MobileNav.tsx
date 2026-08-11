@@ -56,7 +56,7 @@ export default function MobileNav({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "-100%" }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 bg-sky flex flex-col justify-between px-6 pt-24 pb-12 md:hidden"
+          className="fixed inset-0 z-40 bg-sky flex flex-col justify-between px-5 sm:px-6 pt-24 pb-8 sm:pb-12 xl:hidden overflow-y-auto"
         >
           {/* Top bar */}
           <div className="flex justify-between items-center border-b border-ink/20 pb-4">
@@ -73,7 +73,7 @@ export default function MobileNav({
           </div>
 
           {/* Nav Items */}
-          <nav aria-label="Mobile navigation" className="flex flex-col gap-6 my-auto">
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-3 sm:gap-6 my-auto py-8">
             {navItems.map((item, index) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -88,7 +88,7 @@ export default function MobileNav({
                     href={item.href}
                     onClick={onClose}
                     aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center justify-between text-3xl font-extrabold tracking-tight py-2 transition-colors ${
+                    className={`flex items-center justify-between text-2xl sm:text-3xl font-extrabold tracking-tight py-2 transition-colors ${
                       isActive ? "text-blue" : "text-ink hover:text-blue"
                     }`}
                   >

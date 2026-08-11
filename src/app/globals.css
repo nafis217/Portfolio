@@ -144,3 +144,23 @@ h1, h2, h3, h4 {
 p, span, li {
   overflow-wrap: break-word;
 }
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  .bg-grid-pattern {
+    background-size: 28px 28px;
+  }
+}

@@ -50,7 +50,7 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 lg:px-12 py-4",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 lg:px-12 py-4",
           scrolled
             ? "glass-header border-b border-blue/20 shadow-subtle py-3.5"
             : "bg-transparent border-b border-transparent py-6"
@@ -60,13 +60,13 @@ export default function Header() {
           <Link
             href="/"
             aria-label="Back to top"
-            className="hidden md:block font-display text-lg font-black tracking-[0.2em] text-ink hover:text-blue transition-colors"
+            className="font-display text-base sm:text-lg font-black tracking-[0.2em] text-ink hover:text-blue transition-colors"
           >
             NAFIS
           </Link>
 
           {/* Navigation items */}
-          <nav className="hidden md:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-ink/80">
+          <nav className="hidden xl:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-ink/80">
             {NAV_ITEMS.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -114,7 +114,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-ink hover:text-blue transition-colors rounded-xl border border-ink/20 bg-white/70 shadow-subtle"
+              className="xl:hidden min-h-11 min-w-11 p-2 text-ink hover:text-blue transition-colors rounded-xl border border-ink/20 bg-white/70 shadow-subtle"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}

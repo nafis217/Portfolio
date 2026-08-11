@@ -10,7 +10,7 @@ export default function Education() {
   const edu = PORTFOLIO_DATA.education;
 
   return (
-    <section id="education" className="py-28 px-6 lg:px-12 bg-cocoa-light border-t border-ink/10 relative overflow-hidden">
+    <section id="education" className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-12 bg-cocoa-light border-t border-ink/10 relative overflow-hidden">
       {/* Editorial Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.06] z-0 text-center w-full">
         <span className="font-display text-[18vw] font-black tracking-tighter text-cocoa leading-none block">
@@ -18,7 +18,7 @@ export default function Education() {
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-cocoa/20 pb-4">
           <div className="flex items-center gap-3">
@@ -27,7 +27,7 @@ export default function Education() {
             </span>
             <span className="h-1 w-12 bg-cocoa-accent rounded-full" />
           </div>
-          <span className="font-mono text-xs font-bold text-cocoa/80">
+          <span className="hidden sm:block font-mono text-xs font-bold text-cocoa/80">
             ACADEMIC BACKGROUND
           </span>
         </div>
@@ -39,7 +39,7 @@ export default function Education() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5 relative rounded-3xl overflow-hidden border-2 border-cocoa/20 bg-ink min-h-[400px] lg:min-h-full p-8 sm:p-10 flex flex-col justify-between shadow-poster group"
+            className="lg:col-span-5 relative rounded-3xl overflow-hidden border-2 border-cocoa/20 bg-ink min-h-[360px] sm:min-h-[400px] lg:min-h-full p-6 sm:p-10 flex flex-col justify-between shadow-poster group"
           >
             {/* Authentic Campus Photo Background */}
             <div className="absolute inset-0 z-0">
@@ -95,7 +95,7 @@ export default function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-7 bg-cocoa-surface p-8 sm:p-10 rounded-3xl border-2 border-cocoa/20 shadow-poster space-y-6 flex flex-col justify-between"
+            className="lg:col-span-7 bg-cocoa-surface p-6 sm:p-10 rounded-3xl border-2 border-cocoa/20 shadow-poster space-y-6 flex flex-col justify-between"
           >
             <div className="space-y-4 border-b border-cocoa/15 pb-6">
               <div className="flex flex-wrap justify-between items-start gap-4">

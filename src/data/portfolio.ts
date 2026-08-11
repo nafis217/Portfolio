@@ -57,7 +57,6 @@ export const PORTFOLIO_DATA = {
   personal: {
     name: "Md Nafis Al Safayet",
     shortName: "NAFIS",
-    monogram: "NS",
     role: "Software Engineer",
     tagline: "building reliable digital systems.",
     location: "Dhaka, Bangladesh",

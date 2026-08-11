@@ -62,7 +62,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-28 px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative overflow-hidden"
     >
       {/* Decorative accent geometry */}
       <div
@@ -74,7 +74,7 @@ export default function About() {
         className="absolute bottom-12 left-8 w-1.5 h-32 bg-mango/50 rounded-full pointer-events-none hidden lg:block"
       />
 
-      <div className="max-w-7xl mx-auto space-y-20">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 lg:space-y-20">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-ink/15 pb-4">
           <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export default function About() {
             </span>
             <span className="h-1 w-12 bg-coral rounded-full" />
           </div>
-          <span className="font-mono text-xs font-bold text-ink/60">
+          <span className="hidden sm:block font-mono text-xs font-bold text-ink/60">
             PHILOSOPHY &amp; FOCUS
           </span>
         </div>
@@ -116,7 +116,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 bg-white p-8 sm:p-10 rounded-3xl border-2 border-ink/10 shadow-poster space-y-6 relative"
+            className="lg:col-span-5 bg-white p-5 sm:p-10 rounded-3xl border-2 border-ink/10 shadow-poster space-y-6 relative"
           >
             {/* Color accent dots */}
             <div aria-hidden="true" className="absolute top-4 right-4 flex gap-1">

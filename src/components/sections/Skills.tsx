@@ -71,8 +71,8 @@ export default function Skills() {
       : PORTFOLIO_DATA.skills.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="skills" className="py-28 px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="skills" className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-12 bg-vanilla border-t border-ink/10 relative">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Header Label */}
         <div className="flex items-center justify-between border-b border-ink/15 pb-4">
           <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export default function Skills() {
             </span>
             <span className="h-1 w-12 bg-blue rounded-full" />
           </div>
-          <span className="font-mono text-xs font-bold text-ink/60">
+          <span className="hidden sm:block font-mono text-xs font-bold text-ink/60">
             TECHNICAL DOMAINS
           </span>
         </div>
