@@ -12,7 +12,9 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  # A newer commit supersedes an older static export. Cancelling stale runs
+  # prevents Pages from temporarily publishing an outdated artifact.
+  cancel-in-progress: true
 
 jobs:
   build:
