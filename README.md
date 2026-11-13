@@ -6,7 +6,7 @@ Personal portfolio site for a software engineer working across React, React Nati
 
 ## Stack
 
-React 19 · TypeScript · Vite · Tailwind CSS v4 · Lucide icons · oxlint
+React 19 · TypeScript · Vite · Tailwind CSS v4 · Motion (animation) · Lucide icons · oxlint
 
 ## Development
 

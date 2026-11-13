@@ -1,117 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { useState } from 'react';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { Download, Menu, X } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
+import { NAV_LINKS } from '../data/nav';
+import { useActiveSection } from '../hooks/useActiveSection';
+import { Magnetic } from './ui/Magnetic';
 
 const CV_HREF = `${import.meta.env.BASE_URL}${PROFILE_DATA.cvPath}`;
+const IDS = ['hero', ...NAV_LINKS.map((l) => l.id)];
 
-export const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const active = useActiveSection(IDS);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: 'Work', href: '#work' },
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Research', href: '#research' },
-    { name: 'Education', href: '#education' },
-    { name: 'Approach', href: '#how-i-work' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setHidden(y > prev && y > 240 && !open);
+  });
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 header-sticky flex items-center transition-all duration-300 ${isScrolled ? 'shadow-xs border-b border-slate-200/80' : ''}`}>
-      <div className="page-container flex items-center justify-between w-full">
-        
-        {/* Left: Brand Identity */}
-        <a href="#hero" className="flex items-center gap-2.5 group text-slate-900">
-          <div className="w-8 h-8 rounded-lg bg-slate-900 text-white font-mono font-bold text-xs flex items-center justify-center shadow-xs group-hover:bg-sky-700 transition-colors">
-            NS
-          </div>
-          <div className="flex flex-col">
-            <span className="font-heading font-bold text-sm text-slate-900 tracking-tight leading-none">
-              {PROFILE_DATA.name}
+    <motion.header
+      className="fixed inset-x-0 top-0 z-[100] flex justify-center px-4 pt-4"
+      initial={{ y: -90, opacity: 0 }}
+      animate={{ y: hidden ? -110 : 0, opacity: 1 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="relative w-full max-w-[1100px]">
+        <div className="glass flex items-center justify-between gap-4 rounded-full py-2 pl-3 pr-2 shadow-2xl shadow-black/30">
+          <a href="#hero" className="flex items-center gap-3 rounded-full pr-3" aria-label={`${PROFILE_DATA.name} — back to top`}>
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 font-display text-sm font-bold text-ink">
+              NS
             </span>
-            <span className="text-[11px] text-slate-500 font-mono mt-0.5">
-              {PROFILE_DATA.role}
+            <span className="hidden sm:flex flex-col leading-tight">
+              <span className="font-display text-sm font-semibold text-fg">{PROFILE_DATA.name}</span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-subtle">{PROFILE_DATA.role}</span>
             </span>
-          </div>
-        </a>
+          </a>
 
-        {/* Right: Desktop Links & CTA */}
-        <div className="hidden lg:flex items-center gap-6">
-          <nav className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="nav-link"
-              >
-                {link.name}
-              </a>
-            ))}
+          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`relative rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors ${
+                    isActive ? 'text-ink' : 'text-muted hover:text-fg'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-accent to-accent-2"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
+                </a>
+              );
+            })}
           </nav>
 
-          <a
-            href={CV_HREF}
-            download
-            className="btn-primary-editorial text-xs py-2 px-4"
-          >
-            <span>Download CV</span>
-            <Download className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900"
-          aria-label="Toggle Navigation Menu"
-          aria-expanded={mobileMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-
-      </div>
-
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div id="mobile-menu" className="lg:hidden fixed inset-x-0 top-[var(--header-height)] bg-white/95 backdrop-blur-xl border-b border-slate-200 p-6 shadow-lg animate-fade-in">
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-800 hover:text-sky-700 py-1 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-4 border-t border-slate-100">
-              <a
-                href={CV_HREF}
-                download
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn-primary-editorial w-full justify-center text-xs py-3"
-              >
+          <div className="flex items-center gap-2">
+            <Magnetic strength={0.2}>
+              <a href={CV_HREF} download className="btn btn-ghost !py-2.5 !px-4 text-xs">
                 <span>Download CV</span>
-                <Download className="w-4 h-4" />
+                <Download className="h-3.5 w-3.5" aria-hidden="true" />
               </a>
-            </div>
+            </Magnetic>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-fg lg:hidden"
+              aria-label="Toggle navigation menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              id="mobile-menu"
+              className="absolute inset-x-0 top-[calc(100%+0.6rem)] rounded-3xl border border-line-strong bg-ink-2/98 p-4 shadow-2xl shadow-black/40 lg:hidden"
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+            >
+              <ul className="flex flex-col">
+                {NAV_LINKS.map((link, i) => (
+                  <motion.li
+                    key={link.id}
+                    initial={{ opacity: 0, x: -14 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04 * i }}
+                  >
+                    <a
+                      href={`#${link.id}`}
+                      onClick={() => setOpen(false)}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium ${
+                        active === link.id ? 'bg-accent/10 text-accent' : 'text-fg hover:bg-white/5'
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <span className="font-mono text-xs text-subtle">0{i + 1}</span>
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+              <a href={CV_HREF} download onClick={() => setOpen(false)} className="btn btn-primary mt-3 w-full">
+                <span>Download CV</span>
+                <Download className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.header>
   );
-};
+}

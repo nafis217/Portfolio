@@ -1,9 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { ArrowRight, Copy, Check } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ArrowRight, Check, Copy } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
+import { Magnetic } from './ui/Magnetic';
+import { Reveal } from './ui/Reveal';
+import { SplitText } from './ui/SplitText';
 
-export const Contact: React.FC = () => {
+export function Contact() {
   const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
   const emailRef = useRef<HTMLSpanElement>(null);
 
@@ -27,97 +30,89 @@ export const Contact: React.FC = () => {
       selectEmail();
       setStatus('failed');
     }
-    setTimeout(() => setStatus('idle'), 2500);
+    window.setTimeout(() => setStatus('idle'), 2500);
   };
 
   return (
-    <section id="contact" className="section-padding relative border-t border-slate-200/80 bg-slate-900 text-slate-100">
-      <div className="page-container">
-        
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-sky-400 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
-            Contact
-          </span>
+    <section id="contact" className="relative overflow-hidden section-pad">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="blob left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 bg-accent/20" />
+        <div className="font-display text-outline absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center text-[22vw] font-bold leading-none opacity-30">
+          HELLO
+        </div>
+      </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading text-white tracking-tight leading-tight">
-            Have something worth building?
+      <div className="page-container relative z-10">
+        <div className="mx-auto max-w-3xl space-y-8 text-center">
+          <Reveal className="flex items-center justify-center gap-3">
+            <span className="eyebrow">08 / Contact</span>
+          </Reveal>
+
+          <h2 className="font-display text-4xl font-bold text-fg sm:text-6xl">
+            <SplitText text="Have something worth building?" by="word" />
           </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            Whether it's a digital product, internal system, e-commerce experience or engineering challenge, I'm always interested in a good problem.
-          </p>
+          <Reveal delay={0.1}>
+            <p className="mx-auto max-w-2xl text-base text-muted sm:text-lg">
+              Whether it's a digital product, internal system, e-commerce experience or engineering challenge — I'm always interested in a good problem.
+            </p>
+          </Reveal>
 
-          <p className="inline-flex items-center gap-2 text-sm font-mono text-emerald-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" aria-hidden="true"></span>
-            {PROFILE_DATA.availability}
-          </p>
+          <Reveal delay={0.15}>
+            <p className="inline-flex items-center gap-3 rounded-full glass px-5 py-2.5 font-mono text-sm text-accent">
+              <span className="pulse-dot" aria-hidden="true" />
+              {PROFILE_DATA.availability}
+            </p>
+          </Reveal>
 
-          {/* Action CTAs */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href={`mailto:${PROFILE_DATA.contact.email}`}
-              className="btn-primary-editorial bg-sky-600 border-sky-600 hover:bg-sky-500 text-white text-sm py-3 px-6"
-            >
-              <span>Start a Conversation</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </a>
+          <Reveal delay={0.2} className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <Magnetic>
+              <a href={`mailto:${PROFILE_DATA.contact.email}`} className="btn btn-primary !px-7 !py-4">
+                <span>Start a conversation</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <button type="button" onClick={handleCopyEmail} aria-live="polite" className="btn btn-ghost !px-7 !py-4">
+                {status === 'copied' ? (
+                  <>
+                    <Check className="h-4 w-4 text-accent" aria-hidden="true" />
+                    <span className="font-mono text-accent">Email copied!</span>
+                  </>
+                ) : status === 'failed' ? (
+                  <>
+                    <Copy className="h-4 w-4 text-amber-300" aria-hidden="true" />
+                    <span className="font-mono text-amber-300">Copy failed — press Ctrl/Cmd+C</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" aria-hidden="true" />
+                    <span className="font-mono">Copy email</span>
+                  </>
+                )}
+              </button>
+            </Magnetic>
+          </Reveal>
 
-            <button
-              onClick={handleCopyEmail}
-              aria-live="polite"
-              className="btn-secondary-editorial bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700 text-sm py-3 px-5 flex items-center gap-2"
-            >
-              {status === 'copied' ? (
-                <>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span className="text-emerald-400 font-semibold font-mono">Email Copied!</span>
-                </>
-              ) : status === 'failed' ? (
-                <>
-                  <Copy className="w-4 h-4 text-amber-400" />
-                  <span className="text-amber-300 font-mono">Copy failed — press Ctrl/Cmd+C</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4 text-slate-400" />
-                  <span className="font-mono">Copy email</span>
-                </>
-              )}
-            </button>
-          </div>
+          <Reveal delay={0.25}>
+            <p className="font-mono text-sm text-muted">
+              <span ref={emailRef}>{PROFILE_DATA.contact.email}</span>
+            </p>
+          </Reveal>
 
-          <p className="text-sm font-mono text-slate-300">
-            <span ref={emailRef}>{PROFILE_DATA.contact.email}</span>
-          </p>
-
-          {/* Social Channels Row */}
-          <div className="pt-10 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-400">
-            <a
-              href={PROFILE_DATA.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-2"
-            >
-              <GithubIcon className="w-4 h-4" />
+          <Reveal delay={0.3} className="flex flex-wrap items-center justify-center gap-6 pt-6 font-mono text-xs text-muted">
+            <a href={PROFILE_DATA.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 transition-colors hover:text-accent">
+              <GithubIcon className="h-4 w-4" />
               <span>github.com/{PROFILE_DATA.contact.githubHandle}</span>
             </a>
-
-            <span className="text-slate-700">•</span>
-
-            <a
-              href={PROFILE_DATA.contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-2"
-            >
-              <LinkedinIcon className="w-4 h-4 text-sky-400" />
+            <span className="text-line-strong" aria-hidden="true">•</span>
+            <a href={PROFILE_DATA.contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 transition-colors hover:text-accent">
+              <LinkedinIcon className="h-4 w-4" />
               <span>LinkedIn</span>
             </a>
-          </div>
-
+          </Reveal>
         </div>
-
       </div>
     </section>
   );
-};
+}

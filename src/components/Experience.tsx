@@ -1,76 +1,76 @@
-import React from 'react';
-import { EXPERIENCE_DATA, type Experience as ExperienceType } from '../data/experience';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'motion/react';
+import { EXPERIENCE_DATA } from '../data/experience';
+import { Reveal } from './ui/Reveal';
+import { SectionHeading } from './ui/SectionHeading';
+import { SpotlightCard } from './ui/SpotlightCard';
 
-export const Experience: React.FC = () => {
+export function Experience() {
+  const listRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 70%', 'end 55%'] });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.3 });
+
   return (
-    <section id="experience" className="section-padding relative">
+    <section id="experience" className="relative section-pad">
       <div className="page-container">
-        
-        {/* Section Header */}
-        <div className="max-w-2xl mb-16 space-y-3">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-100">
-            Career
-          </span>
-          <h2 className="section-title">
-            Professional Experience
-          </h2>
-          <p className="body-large">
-            Full-stack engineering history across enterprise software, mobile field applications, and custom e-commerce products.
-          </p>
+        <SectionHeading
+          index="03"
+          eyebrow="Career"
+          title="Professional Experience"
+          description="Full-stack engineering across enterprise software, mobile field applications and custom e-commerce."
+        />
+
+        <div ref={listRef} className="relative mt-16">
+          {/* Timeline rail that fills while you scroll */}
+          <div aria-hidden="true" className="absolute bottom-0 left-[11px] top-2 w-px bg-line sm:left-[15px]">
+            <motion.div className="h-full w-full origin-top bg-gradient-to-b from-accent via-accent-2 to-accent-3" style={{ scaleY }} />
+          </div>
+
+          <ol className="space-y-10">
+            {EXPERIENCE_DATA.map((exp, i) => (
+              <li key={exp.id} className="relative pl-11 sm:pl-14">
+                <motion.span
+                  aria-hidden="true"
+                  className="absolute left-0 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-accent/60 bg-ink sm:h-8 sm:w-8"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: '-120px' }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                >
+                  <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_2px_rgba(94,234,212,0.7)]" />
+                </motion.span>
+
+                <Reveal x={30} y={0} delay={0.05 * i}>
+                  <SpotlightCard tilt className="space-y-5 p-6 sm:p-8">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <span className="chip chip-accent">{exp.period}</span>
+                        <h3 className="mt-4 font-display text-2xl font-bold text-fg sm:text-3xl">{exp.company}</h3>
+                        <p className="mt-1 font-mono text-xs text-subtle">{exp.location}</p>
+                      </div>
+                      <div className="text-left sm:text-right">
+                        <p className="font-display text-lg font-semibold text-accent-2">{exp.role}</p>
+                        {exp.subRole && <p className="font-mono text-xs text-muted">{exp.subRole}</p>}
+                      </div>
+                    </div>
+
+                    <p className="max-w-3xl text-sm leading-relaxed text-muted sm:text-base">{exp.description}</p>
+
+                    <ul className="grid gap-2.5 sm:grid-cols-2">
+                      {exp.highlights.map((h) => (
+                        <li key={h} className="flex items-start gap-2.5 text-sm text-muted">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </SpotlightCard>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
         </div>
-
-        {/* Horizontal Editorial Rows (No Timeline Dots) */}
-        <div className="space-y-0">
-          {EXPERIENCE_DATA.map((exp: ExperienceType) => (
-            <div key={exp.id} className="experience-row">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                
-                {/* Left 4 Cols: Period & Company */}
-                <div className="lg:col-span-4 space-y-1">
-                  <span className="text-xs font-mono font-semibold text-sky-700 block">
-                    {exp.period}
-                  </span>
-                  <h3 className="text-xl font-bold font-heading text-slate-900">
-                    {exp.company}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-mono">
-                    {exp.location}
-                  </p>
-                </div>
-
-                {/* Right 8 Cols: Role & Scope */}
-                <div className="lg:col-span-8 space-y-3">
-                  <div>
-                    <h4 className="text-lg font-bold font-heading text-slate-900">
-                      {exp.role}
-                    </h4>
-                    {exp.subRole && (
-                      <span className="text-xs font-mono text-slate-600 block mt-0.5">
-                        {exp.subRole}
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-slate-600 text-sm leading-relaxed max-w-2xl">
-                    {exp.description}
-                  </p>
-
-                  <div className="pt-2 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-slate-600">
-                    {exp.highlights.map((item, idx) => (
-                      <span key={idx} className="flex items-center gap-1.5">
-                        <span className="text-sky-600">•</span>
-                        <span>{item}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          ))}
-        </div>
-
       </div>
     </section>
   );
-};
+}

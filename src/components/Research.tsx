@@ -1,87 +1,82 @@
-import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { RESEARCH_DATA } from '../data/research';
+import { Counter } from './ui/Counter';
+import { Reveal } from './ui/Reveal';
+import { SectionHeading } from './ui/SectionHeading';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 const showTodo = import.meta.env.DEV;
 const isTodo = (v: string) => v.startsWith('TODO');
 
-export const Research: React.FC = () => {
+function decimalsOf(value: string): number {
+  const dot = value.indexOf('.');
+  return dot === -1 ? 0 : value.length - dot - 1;
+}
+
+export function Research() {
+  const context = [
+    ['Dataset', RESEARCH_DATA.dataset],
+    ['Baseline', RESEARCH_DATA.baseline],
+  ].filter(([, v]) => showTodo || !isTodo(v));
+  const links = RESEARCH_DATA.links;
+  const linkList: { label: string; href: string }[] = [];
+  if (links?.paper) linkList.push({ label: 'Paper', href: links.paper });
+  if (links?.thesis) linkList.push({ label: 'Thesis', href: links.thesis });
+  if (links?.repo) linkList.push({ label: 'Code', href: links.repo });
+
   return (
-    <section id="research" className="section-padding relative border-t border-slate-200/80">
+    <section id="research" className="relative section-pad">
       <div className="page-container">
-        
-        {/* Section Header */}
-        <div className="max-w-2xl mb-12 space-y-3">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-100">
-            Academic Research
-          </span>
-          <h2 className="section-title">
-            Research & Engineering
-          </h2>
-          <p className="body-large">
-            Quantitative research focused on statistical data recovery and missing data imputation algorithms.
-          </p>
-        </div>
+        <SectionHeading
+          index="05"
+          eyebrow="Academic research"
+          title="Research & Engineering"
+          description="Quantitative research on statistical data recovery and missing-data imputation."
+        />
 
-        {/* Sophisticated Research Block */}
-        <div className="editorial-card-soft p-8 bg-white/90 space-y-6">
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <Reveal className="mt-14">
+          <SpotlightCard className="space-y-8 p-7 sm:p-10">
             <div>
-              <span className="text-xs font-mono text-indigo-700 font-semibold block">
-                {RESEARCH_DATA.period}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 mt-1">
-                {RESEARCH_DATA.title}
-              </h3>
-              <p className="text-xs font-mono text-slate-500 mt-0.5">
-                {RESEARCH_DATA.frameworkName}
-              </p>
+              <span className="chip chip-accent">{RESEARCH_DATA.period}</span>
+              <h3 className="mt-4 max-w-3xl font-display text-2xl font-bold text-fg sm:text-4xl">{RESEARCH_DATA.title}</h3>
+              <p className="mt-2 font-mono text-xs text-accent-3">{RESEARCH_DATA.frameworkName}</p>
             </div>
-          </div>
 
-          <p className="text-slate-700 text-sm leading-relaxed max-w-3xl">
-            {RESEARCH_DATA.description}
-          </p>
+            <p className="max-w-3xl text-sm leading-relaxed text-muted sm:text-base">{RESEARCH_DATA.description}</p>
 
-          {/* Evaluation context */}
-          {[['Dataset', RESEARCH_DATA.dataset], ['Baseline', RESEARCH_DATA.baseline]]
-            .filter(([, v]) => showTodo || !isTodo(v))
-            .map(([label, value]) => (
-              <p key={label} className="text-xs font-mono text-slate-600">
-                <span className="font-semibold text-slate-800">{label}:</span> {value}
-              </p>
-            ))}
-
-          {/* Research Results Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            {RESEARCH_DATA.metrics.map((m) => (
-              <div key={m.label} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                <span className="text-xs font-mono text-slate-600 block">{m.label}</span>
-                <span className="text-2xl font-bold font-mono text-indigo-700 block mt-1">{m.value}</span>
-                {m.note && <span className="text-[11px] font-mono text-slate-400">{m.note}</span>}
+            {context.length > 0 && (
+              <div className="space-y-1.5 font-mono text-xs text-muted">
+                {context.map(([label, value]) => (
+                  <p key={label}>
+                    <span className="font-semibold text-fg">{label}:</span> {value}
+                  </p>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
 
-          {/* Optional publication links */}
-          {RESEARCH_DATA.links && Object.values(RESEARCH_DATA.links).some(Boolean) && (
-            <div className="flex flex-wrap gap-3 pt-2">
-              {([['paper', 'Paper'], ['thesis', 'Thesis'], ['repo', 'Code']] as const).map(([key, label]) => {
-                const href = RESEARCH_DATA.links?.[key];
-                return href ? (
-                  <a key={key} href={href} target="_blank" rel="noopener noreferrer" className="btn-secondary-editorial text-xs py-2 px-3.5">
-                    <span>{label}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                ) : null;
-              })}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {RESEARCH_DATA.metrics.map((m) => (
+                <div key={m.label} className="rounded-2xl border border-line bg-ink/50 p-5">
+                  <span className="block font-mono text-xs uppercase tracking-wider text-subtle">{m.label}</span>
+                  <Counter to={Number(m.value)} decimals={decimalsOf(m.value)} className="mt-2 block font-display text-5xl font-bold text-gradient" />
+                  {m.note && <span className="mt-1 block font-mono text-[11px] text-subtle">{m.note}</span>}
+                </div>
+              ))}
             </div>
-          )}
 
-        </div>
-
+            {linkList.length > 0 && (
+              <div className="flex flex-wrap gap-3">
+                {linkList.map((l) => (
+                  <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost !py-2.5 !px-4 text-xs">
+                    <span>{l.label}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            )}
+          </SpotlightCard>
+        </Reveal>
       </div>
     </section>
   );
-};
+}

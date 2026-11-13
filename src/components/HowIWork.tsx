@@ -1,67 +1,52 @@
-import React from 'react';
+import { motion } from 'motion/react';
+import { Reveal } from './ui/Reveal';
+import { SectionHeading } from './ui/SectionHeading';
+import { SpotlightCard } from './ui/SpotlightCard';
 
-export const HowIWork: React.FC = () => {
-  const steps = [
-    {
-      step: "01",
-      title: "Understand",
-      description: "Understand the actual operational problem and people involved."
-    },
-    {
-      step: "02",
-      title: "Structure",
-      description: "Map workflows, permissions, data and edge cases."
-    },
-    {
-      step: "03",
-      title: "Build",
-      description: "Create interfaces, APIs and reliable data flows."
-    },
-    {
-      step: "04",
-      title: "Improve",
-      description: "Test with real usage, solve friction and iterate."
-    }
-  ];
+const STEPS = [
+  { step: '01', title: 'Understand', description: 'Understand the actual operational problem and the people involved.' },
+  { step: '02', title: 'Structure', description: 'Map workflows, permissions, data and edge cases.' },
+  { step: '03', title: 'Build', description: 'Create interfaces, APIs and reliable data flows.' },
+  { step: '04', title: 'Improve', description: 'Test with real usage, solve friction and iterate.' },
+];
 
+export function HowIWork() {
   return (
-    <section id="how-i-work" className="section-padding relative border-t border-slate-200/80">
+    <section id="how-i-work" className="relative section-pad">
       <div className="page-container">
-        
-        {/* Section Header */}
-        <div className="max-w-2xl mb-12 space-y-3">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-100">
-            Methodology
-          </span>
-          <h2 className="section-title">
-            How I Approach a Problem
-          </h2>
-          <p className="body-large">
-            A disciplined, product-focused workflow for engineering reliable systems.
-          </p>
-        </div>
+        <SectionHeading
+          index="07"
+          eyebrow="Methodology"
+          title="How I approach a problem"
+          description="A disciplined, product-focused workflow for engineering reliable systems."
+        />
 
-        {/* 4-Step Horizontal Editorial Visual */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((item) => (
-            <div
-              key={item.step}
-              className="p-6 rounded-2xl bg-white border border-slate-200/80 space-y-3 relative hover:border-slate-300 transition-colors"
-            >
-              <span className="font-mono text-xs font-bold text-sky-700 block">
-                {item.step}
-              </span>
-              <h3 className="text-lg font-bold font-heading text-slate-900">
-                {item.title}
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-sans">
-                {item.description}
-              </p>
-            </div>
-          ))}
+        <div className="relative mt-16">
+          {/* Connector line draws across when the steps enter view */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute left-0 right-0 top-[3.1rem] hidden h-px origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3 lg:block"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1.4, ease: [0.65, 0, 0.35, 1] }}
+          />
+          <ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {STEPS.map((s, i) => (
+              <li key={s.step}>
+                <Reveal delay={i * 0.12} className="h-full">
+                  <SpotlightCard tilt className="relative h-full space-y-3 p-6 pt-8">
+                    <span className="font-display text-outline absolute right-4 top-2 text-6xl font-bold" aria-hidden="true">{s.step}</span>
+                    <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-accent shadow-[0_0_18px_3px_rgba(94,234,212,0.55)]" aria-hidden="true" />
+                    <h3 className="pt-2 font-display text-2xl font-bold text-fg">{s.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted">{s.description}</p>
+                  </SpotlightCard>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
         </div>
-
       </div>
     </section>
   );
-};
+}
