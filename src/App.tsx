@@ -13,8 +13,9 @@ import { Footer } from './components/Footer';
 export function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-sky-200 selection:text-slate-900">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Header />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <Projects />
         <About />

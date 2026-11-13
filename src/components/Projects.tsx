@@ -45,7 +45,7 @@ export const Projects: React.FC = () => {
                 key={project.id}
                 className="project-card-group group flex flex-col space-y-4"
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${isWideFirst ? '' : 'lg:flex-row-reverse'}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                   
                   {/* Cover: first screenshot, or placeholder when none supplied */}
                   <div className={`${isWideFirst ? 'lg:col-span-7' : 'lg:col-span-5 lg:order-2'} w-full overflow-hidden`}>
@@ -69,7 +69,7 @@ export const Projects: React.FC = () => {
                   </div>
 
                   {/* Editorial Text Content Block */}
-                  <div className={`${isWideFirst ? 'lg:col-span-5' : 'lg:col-span-7'} space-y-4 ${!isWideFirst && 'lg:order-1'}`}>
+                  <div className={`${isWideFirst ? 'lg:col-span-5' : 'lg:col-span-7'} space-y-4 ${isWideFirst ? '' : 'lg:order-1'}`}>
                     
                     <div className="flex items-center gap-2">
                       <span className="font-mono text-xs font-bold text-slate-400">{project.number}</span>
@@ -125,6 +125,8 @@ export const Projects: React.FC = () => {
                       {project.caseStudyDetails && (
                         <button
                           onClick={() => toggleExpand(project.id)}
+                          aria-expanded={isExpanded}
+                          aria-controls={`case-${project.id}`}
                           className="btn-secondary-editorial text-xs py-2 px-3.5 flex items-center gap-1.5"
                         >
                           <span>{isExpanded ? 'Hide Case Overview' : 'Case Overview'}</span>
@@ -139,7 +141,7 @@ export const Projects: React.FC = () => {
 
                 {/* Expandable Case Overview Drawer */}
                 {isExpanded && project.caseStudyDetails && (
-                  <div className="p-6 sm:p-8 rounded-2xl bg-slate-900 text-slate-100 space-y-6 animate-fade-in border border-slate-800">
+                  <div id={`case-${project.id}`} className="p-6 sm:p-8 rounded-2xl bg-slate-900 text-slate-100 space-y-6 animate-fade-in border border-slate-800">
                     <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                       <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider">
                         Case Overview — {project.title}

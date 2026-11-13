@@ -22,6 +22,8 @@
   --accent-soft: #dff2fb;
   --accent-secondary: #75a9c5;
 
+  --header-height: 72px;
+
   --line: rgba(16, 24, 40, 0.08);
   --line-strong: rgba(16, 24, 40, 0.14);
 
@@ -44,6 +46,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 16px);
   color-scheme: light;
 }
 
@@ -85,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Fixed Header & Nav */
 .header-sticky {
-  height: 72px;
+  height: var(--header-height);
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -246,4 +249,38 @@ h1, h2, h3, h4, h5, h6 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Accessibility: skip link + visible keyboard focus */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--text);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+#contact :focus-visible {
+  outline-color: #7dd3fc;
+}
+
+main:focus {
+  outline: none;
 }

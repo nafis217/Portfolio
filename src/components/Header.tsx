@@ -76,6 +76,8 @@ export const Header: React.FC = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900"
           aria-label="Toggle Navigation Menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -84,7 +86,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[72px] bg-white/95 backdrop-blur-xl border-b border-slate-200 p-6 shadow-lg animate-fade-in">
+        <div id="mobile-menu" className="lg:hidden fixed inset-x-0 top-[var(--header-height)] bg-white/95 backdrop-blur-xl border-b border-slate-200 p-6 shadow-lg animate-fade-in">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a

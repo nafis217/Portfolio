@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ArrowRight, Copy, Check } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 export const Contact: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const emailRef = useRef<HTMLSpanElement>(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PROFILE_DATA.contact.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const selectEmail = () => {
+    const node = emailRef.current;
+    if (!node) return;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText(PROFILE_DATA.contact.email);
+      setStatus('copied');
+    } catch {
+      // Fallback: select the text so the visitor can copy it manually.
+      selectEmail();
+      setStatus('failed');
+    }
+    setTimeout(() => setStatus('idle'), 2500);
   };
 
   return (
@@ -46,21 +64,31 @@ export const Contact: React.FC = () => {
 
             <button
               onClick={handleCopyEmail}
+              aria-live="polite"
               className="btn-secondary-editorial bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700 text-sm py-3 px-5 flex items-center gap-2"
             >
-              {copied ? (
+              {status === 'copied' ? (
                 <>
                   <Check className="w-4 h-4 text-emerald-400" />
                   <span className="text-emerald-400 font-semibold font-mono">Email Copied!</span>
                 </>
+              ) : status === 'failed' ? (
+                <>
+                  <Copy className="w-4 h-4 text-amber-400" />
+                  <span className="text-amber-300 font-mono">Copy failed — press Ctrl/Cmd+C</span>
+                </>
               ) : (
                 <>
                   <Copy className="w-4 h-4 text-slate-400" />
-                  <span className="font-mono">{PROFILE_DATA.contact.email}</span>
+                  <span className="font-mono">Copy email</span>
                 </>
               )}
             </button>
           </div>
+
+          <p className="text-sm font-mono text-slate-300">
+            <span ref={emailRef}>{PROFILE_DATA.contact.email}</span>
+          </p>
 
           {/* Social Channels Row */}
           <div className="pt-10 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-400">
