@@ -32,7 +32,7 @@ function RoleCycler() {
   }, []);
 
   return (
-    <p className="flex flex-wrap items-baseline gap-x-2 font-display text-xl sm:text-3xl font-medium text-muted">
+    <p className="flex flex-wrap items-baseline gap-x-2 font-display text-2xl sm:text-4xl text-muted">
       <span>I build</span>
       <span className="relative inline-flex h-[1.4em] overflow-hidden">
         <AnimatePresence mode="wait">
@@ -61,7 +61,7 @@ function OrbitRing({ items, radius, duration, reverse = false }: { items: string
       {items.map((item, i) => (
         <div key={item} className="orbit-slot" style={{ '--a': `${(360 / items.length) * i}deg`, '--r': radius } as CSSProperties}>
           <span className="orbit-chip" style={{ '--a': `${(360 / items.length) * i}deg` } as CSSProperties}>
-            <span className="chip !text-[11px] !text-fg bg-panel/90 border-line-strong shadow-lg shadow-black/30 whitespace-nowrap" style={{ '--dur': `${duration}s` } as CSSProperties}>
+            <span className="chip !text-[11px] !text-fg bg-white border-line-strong shadow-lg shadow-black/10 whitespace-nowrap" style={{ '--dur': `${duration}s` } as CSSProperties}>
               {item}
             </span>
           </span>
@@ -94,17 +94,17 @@ export function Hero() {
         <div className="grid-bg absolute inset-0" />
         <motion.div style={{ y: blobY }} className="absolute inset-0">
           <motion.div
-            className="blob left-[-8%] top-[8%] h-[420px] w-[420px] bg-accent/40"
+            className="blob left-[-8%] top-[8%] h-[420px] w-[420px] bg-accent/90"
             animate={{ x: [0, 70, -30, 0], y: [0, 50, 90, 0] }}
             transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="blob right-[-6%] top-[18%] h-[480px] w-[480px] bg-accent-3/35"
+            className="blob right-[-6%] top-[18%] h-[480px] w-[480px] bg-accent-3/90"
             animate={{ x: [0, -80, 20, 0], y: [0, 70, -20, 0] }}
             transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="blob bottom-[-12%] left-[35%] h-[380px] w-[380px] bg-accent-2/30"
+            className="blob bottom-[-12%] left-[35%] h-[380px] w-[380px] bg-accent-2/90"
             animate={{ x: [0, 50, -60, 0], y: [0, -40, 30, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -122,16 +122,16 @@ export function Hero() {
               className="inline-flex flex-wrap items-center gap-3 rounded-full glass px-4 py-2 text-xs font-mono"
             >
               <span className="pulse-dot" aria-hidden="true" />
-              <span className="uppercase tracking-widest text-accent">{PROFILE_DATA.role}</span>
+              <span className="uppercase tracking-widest text-deep">{PROFILE_DATA.role}</span>
               <span className="text-line-strong">•</span>
               <span className="flex items-center gap-1.5 text-muted">
                 <MapPin className="h-3 w-3" aria-hidden="true" /> {PROFILE_DATA.location}
               </span>
             </motion.div>
 
-            <h1 className="font-display font-bold text-fg text-[clamp(2.8rem,8vw,6.5rem)]">
+            <h1 className="font-display text-fg text-[clamp(3.2rem,9vw,7.5rem)]">
               <span className="block"><SplitText text="Md Nafis" delay={d + 0.1} /></span>
-              <span className="block text-gradient"><SplitText text="Al Safayet" delay={d + 0.35} /></span>
+              <span className="block italic text-gradient"><SplitText text="Al Safayet" delay={d + 0.35} /></span>
             </h1>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: d + 0.9, duration: 0.7 }} className="space-y-5">
@@ -165,7 +165,7 @@ export function Hero() {
               transition={{ delay: d + 1.3, duration: 0.7 }}
               className="flex items-center gap-2 font-mono text-xs text-subtle"
             >
-              <Building2 className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              <Building2 className="h-3.5 w-3.5 text-deep" aria-hidden="true" />
               <span>{PROFILE_DATA.currentRoleContext}</span>
             </motion.div>
           </div>
@@ -178,11 +178,11 @@ export function Hero() {
             className="relative mx-auto aspect-square w-full max-w-[460px] lg:col-span-5"
             aria-hidden="true"
           >
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/10 via-transparent to-accent-3/10 blur-2xl" />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/60 via-transparent to-accent-3/60 blur-2xl" />
             <OrbitRing items={OUTER_RING} radius="clamp(125px, 17vw, 200px)" duration={55} reverse />
             <OrbitRing items={INNER_RING} radius="clamp(80px, 11vw, 125px)" duration={38} />
-            <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] glass shadow-2xl shadow-accent/10">
-              <span className="font-display text-4xl font-bold text-gradient">NS</span>
+            <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] bg-ink shadow-2xl shadow-black/20">
+              <span className="font-display text-5xl text-paper">NS</span>
             </div>
           </motion.div>
         </div>
@@ -205,10 +205,10 @@ export function Hero() {
         </motion.dl>
       </motion.div>
 
-      <a href="#work" aria-label="Scroll to selected work" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-subtle transition-colors hover:text-accent sm:flex">
+      <a href="#work" aria-label="Scroll to selected work" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-subtle transition-colors hover:text-deep sm:flex">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
         <span className="flex h-9 w-5 justify-center rounded-full border border-line-strong pt-1.5">
-          <span className="scroll-cue-dot block h-1.5 w-1 rounded-full bg-accent" />
+          <span className="scroll-cue-dot block h-1.5 w-1 rounded-full bg-ink" />
         </span>
       </a>
     </section>

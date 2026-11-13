@@ -24,17 +24,17 @@ export function Header() {
     <motion.header
       className="fixed inset-x-0 top-0 z-[100] flex justify-center px-4 pt-4"
       initial={{ y: -90, opacity: 0 }}
-      animate={{ y: hidden ? -110 : 0, opacity: 1 }}
+      animate={{ y: hidden && !open ? -110 : 0, opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="relative w-full max-w-[1100px]">
-        <div className="glass flex items-center justify-between gap-4 rounded-full py-2 pl-3 pr-2 shadow-2xl shadow-black/30">
+        <div className="glass flex items-center justify-between gap-4 rounded-full py-2 pl-3 pr-2 shadow-2xl shadow-black/10">
           <a href="#hero" className="flex items-center gap-3 rounded-full pr-3" aria-label={`${PROFILE_DATA.name} — back to top`}>
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 font-display text-sm font-bold text-ink">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-display text-base text-paper">
               NS
             </span>
             <span className="hidden sm:flex flex-col leading-tight">
-              <span className="font-display text-sm font-semibold text-fg">{PROFILE_DATA.name}</span>
+              <span className="font-display text-base text-fg">{PROFILE_DATA.name}</span>
               <span className="font-mono text-[10px] uppercase tracking-widest text-subtle">{PROFILE_DATA.role}</span>
             </span>
           </a>
@@ -48,13 +48,13 @@ export function Header() {
                   href={`#${link.id}`}
                   aria-current={isActive ? 'true' : undefined}
                   className={`relative rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors ${
-                    isActive ? 'text-ink' : 'text-muted hover:text-fg'
+                    isActive ? 'text-paper' : 'text-muted hover:text-fg'
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-accent to-accent-2"
+                      className="absolute inset-0 rounded-full bg-ink"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -88,7 +88,7 @@ export function Header() {
           {open && (
             <motion.div
               id="mobile-menu"
-              className="absolute inset-x-0 top-[calc(100%+0.6rem)] rounded-3xl border border-line-strong bg-ink-2/98 p-4 shadow-2xl shadow-black/40 lg:hidden"
+              className="absolute inset-x-0 top-[calc(100%+0.6rem)] rounded-3xl border border-line-strong bg-paper p-4 shadow-2xl shadow-black/15 lg:hidden"
               initial={{ opacity: 0, y: -12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
@@ -106,7 +106,7 @@ export function Header() {
                       href={`#${link.id}`}
                       onClick={() => setOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium ${
-                        active === link.id ? 'bg-accent/10 text-accent' : 'text-fg hover:bg-white/5'
+                        active === link.id ? 'bg-accent/50 text-fg' : 'text-fg hover:bg-black/5'
                       }`}
                     >
                       <span>{link.label}</span>

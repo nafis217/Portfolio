@@ -14,7 +14,7 @@ export function SectionHeading({ index, eyebrow, title, description, className =
     <div className={`max-w-3xl space-y-5 ${className}`}>
       <Reveal className="flex items-center gap-3">
         <span className="eyebrow">{index} / {eyebrow}</span>
-        <span className="h-px w-16 bg-gradient-to-r from-accent/60 to-transparent" />
+        <span className="h-px w-16 bg-gradient-to-r from-deep/60 to-transparent" />
       </Reveal>
       <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-fg">
         <SplitText text={title} by="word" />

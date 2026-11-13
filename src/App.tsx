@@ -1,4 +1,5 @@
 import { MotionConfig } from 'motion/react';
+import { SmoothScroll } from './components/SmoothScroll';
 import { Loader } from './components/Loader';
 import { Cursor } from './components/Cursor';
 import { ScrollProgress } from './components/ScrollProgress';
@@ -18,8 +19,9 @@ import { Footer } from './components/Footer';
 export function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="grain relative min-h-screen bg-ink text-fg antialiased">
+      <div className="grain relative min-h-screen bg-paper text-fg antialiased">
         <a href="#main-content" className="skip-link">Skip to content</a>
+        <SmoothScroll />
         <Loader />
         <Cursor />
         <ScrollProgress />

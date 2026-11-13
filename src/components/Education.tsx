@@ -28,7 +28,7 @@ export function Education() {
                       <GraduationCap className="h-6 w-6" aria-hidden="true" />
                     </span>
                     <div>
-                      <span className="font-mono text-xs text-accent">{primary.period}</span>
+                      <span className="font-mono text-xs text-deep">{primary.period}</span>
                       <h3 className="font-display text-2xl font-bold text-fg sm:text-3xl">{primary.institution}</h3>
                       <p className="mt-1 text-sm text-muted">{primary.degree} in {primary.field}</p>
                     </div>
@@ -60,7 +60,7 @@ export function Education() {
               <Reveal key={h.title} delay={(earlier.length + i) * 0.1}>
                 <SpotlightCard className="h-full space-y-1.5 p-6">
                   <div className="flex items-center justify-between font-mono text-xs text-subtle">
-                    <span className="flex items-center gap-1.5 text-accent-3">
+                    <span className="flex items-center gap-1.5 text-deep-2">
                       <Award className="h-3.5 w-3.5" aria-hidden="true" /> Honor
                     </span>
                     <span>{h.year}</span>

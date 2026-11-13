@@ -19,12 +19,12 @@ export function SectionRail() {
             aria-current={isActive ? 'true' : undefined}
             className="group flex items-center gap-3"
           >
-            <span className="font-mono text-[10px] uppercase tracking-widest text-accent opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-fg opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
               {link.label}
             </span>
             <span
               className={`block rounded-full transition-all duration-300 ${
-                isActive ? 'h-6 w-[6px] bg-accent' : 'h-[6px] w-[6px] bg-subtle/60 group-hover:bg-accent-2'
+                isActive ? 'h-6 w-[6px] bg-ink' : 'h-[6px] w-[6px] bg-subtle/60 group-hover:bg-deep'
               }`}
             />
           </a>

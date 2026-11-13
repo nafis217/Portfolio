@@ -1,3 +1,10 @@
+export interface ProjectTheme {
+  /** Soft pastel used for backgrounds and wipes. */
+  soft: string;
+  /** Deeper tone of the same hue for lines and small details. */
+  deep: string;
+}
+
 export interface ProjectItem {
   id: string;
   number: string;
@@ -13,6 +20,8 @@ export interface ProjectItem {
   /** 1-3 short result chips. Entries starting with "TODO" are hidden in production builds. */
   metrics?: string[];
   isPrototype?: boolean;
+  /** Per-project colour theme (selected projects only). */
+  theme?: ProjectTheme;
   caseStudyDetails?: {
     problem: string;
     contribution: string;
@@ -25,6 +34,7 @@ export interface ProjectItem {
 export const SELECTED_PROJECTS: ProjectItem[] = [
   {
     id: "igloo-oms",
+    theme: { soft: "#bcd4e6", deep: "#2f5d86" },
     images: [], // drop files in public/projects/igloo-oms/ and list e.g. "projects/igloo-oms/cover.png"
     metrics: ["TODO: ~N orders/day", "TODO: N depots", "TODO: N active users"],
     number: "01",
@@ -48,6 +58,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "iglootrack",
+    theme: { soft: "#c2e2d3", deep: "#2f7a62" },
     images: [], // drop files in public/projects/iglootrack/ and list e.g. "projects/iglootrack/cover.png"
     metrics: ["TODO: N freezers tracked", "TODO: N shops mapped"],
     number: "02",
@@ -71,6 +82,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "my-salon",
+    theme: { soft: "#d3c9ea", deep: "#5f4ea0" },
     number: "03",
     title: "MY-SALON",
     subtitle: "Multi-Tenant Salon SaaS Platform",
@@ -82,6 +94,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "pink-fresh",
+    theme: { soft: "#f3d9c7", deep: "#9a5b34" },
     liveUrl: "https://www.pinkfreshstudio.com/collections",
     images: [], // drop files in public/projects/pink-fresh/ and list e.g. "projects/pink-fresh/cover.png"
     metrics: ["TODO: result, e.g. page speed or launch date"],
@@ -106,6 +119,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "aml-core",
+    theme: { soft: "#ece0b8", deep: "#86702a" },
     images: [], // drop files in public/projects/aml-core/ and list e.g. "projects/aml-core/cover.png"
     metrics: ["TODO: N companies / departments modelled"],
     number: "05",

@@ -39,7 +39,7 @@ export function Research() {
             <div>
               <span className="chip chip-accent">{RESEARCH_DATA.period}</span>
               <h3 className="mt-4 max-w-3xl font-display text-2xl font-bold text-fg sm:text-4xl">{RESEARCH_DATA.title}</h3>
-              <p className="mt-2 font-mono text-xs text-accent-3">{RESEARCH_DATA.frameworkName}</p>
+              <p className="mt-2 font-mono text-xs text-deep-2">{RESEARCH_DATA.frameworkName}</p>
             </div>
 
             <p className="max-w-3xl text-sm leading-relaxed text-muted sm:text-base">{RESEARCH_DATA.description}</p>
@@ -56,7 +56,7 @@ export function Research() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               {RESEARCH_DATA.metrics.map((m) => (
-                <div key={m.label} className="rounded-2xl border border-line bg-ink/50 p-5">
+                <div key={m.label} className="rounded-2xl border border-line bg-white/70 p-5">
                   <span className="block font-mono text-xs uppercase tracking-wider text-subtle">{m.label}</span>
                   <Counter to={Number(m.value)} decimals={decimalsOf(m.value)} className="mt-2 block font-display text-5xl font-bold text-gradient" />
                   {m.note && <span className="mt-1 block font-mono text-[11px] text-subtle">{m.note}</span>}

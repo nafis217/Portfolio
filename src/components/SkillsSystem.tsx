@@ -31,7 +31,7 @@ export function SkillsSystem() {
               <SpotlightCard tilt className="h-full space-y-4 p-6">
                 <div className="flex items-center justify-between border-b border-line pb-3">
                   <h3 className="font-display text-lg font-bold text-fg">{group.category}</h3>
-                  <span className="font-mono text-xs text-accent">0{i + 1}</span>
+                  <span className="font-mono text-xs text-deep">0{i + 1}</span>
                 </div>
                 <ul className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (

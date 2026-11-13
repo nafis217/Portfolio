@@ -25,7 +25,7 @@ export function HowIWork() {
           {/* Connector line draws across when the steps enter view */}
           <motion.div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-[3.1rem] hidden h-px origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3 lg:block"
+            className="absolute left-0 right-0 top-[3.1rem] hidden h-px origin-left bg-gradient-to-r from-deep via-deep-2 to-deep-3 lg:block"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -37,7 +37,7 @@ export function HowIWork() {
                 <Reveal delay={i * 0.12} className="h-full">
                   <SpotlightCard tilt className="relative h-full space-y-3 p-6 pt-8">
                     <span className="font-display text-outline absolute right-4 top-2 text-6xl font-bold" aria-hidden="true">{s.step}</span>
-                    <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-accent shadow-[0_0_18px_3px_rgba(94,234,212,0.55)]" aria-hidden="true" />
+                    <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-deep shadow-[0_0_18px_3px_rgba(47,93,134,0.4)]" aria-hidden="true" />
                     <h3 className="pt-2 font-display text-2xl font-bold text-fg">{s.title}</h3>
                     <p className="text-sm leading-relaxed text-muted">{s.description}</p>
                   </SpotlightCard>

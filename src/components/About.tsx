@@ -59,11 +59,11 @@ export function About() {
             <Reveal delay={0.1}>
               <SpotlightCard className="space-y-3 p-6">
                 <div className="flex items-center gap-2 font-mono text-xs text-muted">
-                  <MapPin className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                  <MapPin className="h-3.5 w-3.5 text-deep" aria-hidden="true" />
                   {PROFILE_DATA.location}
                 </div>
                 <p className="flex items-start gap-2 text-sm text-muted">
-                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-accent-2" aria-hidden="true" />
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-deep" aria-hidden="true" />
                   <span>{PROFILE_DATA.currentRoleContext}</span>
                 </p>
               </SpotlightCard>

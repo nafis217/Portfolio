@@ -23,7 +23,7 @@ export function Experience() {
         <div ref={listRef} className="relative mt-16">
           {/* Timeline rail that fills while you scroll */}
           <div aria-hidden="true" className="absolute bottom-0 left-[11px] top-2 w-px bg-line sm:left-[15px]">
-            <motion.div className="h-full w-full origin-top bg-gradient-to-b from-accent via-accent-2 to-accent-3" style={{ scaleY }} />
+            <motion.div className="h-full w-full origin-top bg-gradient-to-b from-deep via-deep-2 to-deep-3" style={{ scaleY }} />
           </div>
 
           <ol className="space-y-10">
@@ -31,13 +31,13 @@ export function Experience() {
               <li key={exp.id} className="relative pl-11 sm:pl-14">
                 <motion.span
                   aria-hidden="true"
-                  className="absolute left-0 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-accent/60 bg-ink sm:h-8 sm:w-8"
+                  className="absolute left-0 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-deep/50 bg-paper sm:h-8 sm:w-8"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true, margin: '-120px' }}
                   transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                 >
-                  <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_2px_rgba(94,234,212,0.7)]" />
+                  <span className="h-2 w-2 rounded-full bg-deep shadow-[0_0_12px_2px_rgba(47,93,134,0.45)]" />
                 </motion.span>
 
                 <Reveal x={30} y={0} delay={0.05 * i}>
@@ -49,7 +49,7 @@ export function Experience() {
                         <p className="mt-1 font-mono text-xs text-subtle">{exp.location}</p>
                       </div>
                       <div className="text-left sm:text-right">
-                        <p className="font-display text-lg font-semibold text-accent-2">{exp.role}</p>
+                        <p className="font-display text-lg font-semibold text-deep">{exp.role}</p>
                         {exp.subRole && <p className="font-mono text-xs text-muted">{exp.subRole}</p>}
                       </div>
                     </div>
@@ -59,7 +59,7 @@ export function Experience() {
                     <ul className="grid gap-2.5 sm:grid-cols-2">
                       {exp.highlights.map((h) => (
                         <li key={h} className="flex items-start gap-2.5 text-sm text-muted">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-deep" aria-hidden="true" />
                           <span>{h}</span>
                         </li>
                       ))}
