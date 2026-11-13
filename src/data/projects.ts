@@ -8,9 +8,11 @@ export interface ProjectItem {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
+  /** Screenshot/diagram paths relative to /public, e.g. "projects/igloo-oms/cover.png". First one is the cover. */
+  images?: string[];
+  /** 1-3 short result chips. Entries starting with "TODO" are hidden in production builds. */
+  metrics?: string[];
   isPrototype?: boolean;
-  featured: boolean;
-  aspectRatio?: string;
   caseStudyDetails?: {
     problem: string;
     contribution: string;
@@ -23,14 +25,14 @@ export interface ProjectItem {
 export const SELECTED_PROJECTS: ProjectItem[] = [
   {
     id: "igloo-oms",
+    images: [], // drop files in public/projects/igloo-oms/ and list e.g. "projects/igloo-oms/cover.png"
+    metrics: ["TODO: ~N orders/day", "TODO: N depots", "TODO: N active users"],
     number: "01",
     title: "Igloo Order Management System",
     subtitle: "Enterprise Order Workflow & Dispatch Platform",
     category: "Enterprise System",
     description: "Enterprise order-management platform covering order creation, multi-level approvals, delivery dispatch, payment collection, SMS workflows, and KPI reporting.",
     technologies: ["React", "React Native", "ASP.NET Core Web API", "SQL Server"],
-    featured: true,
-    aspectRatio: "16 / 10",
     caseStudyDetails: {
       problem: "Paper-based distributor orders caused delays in supervisor confirmation, delivery assignment, discount approval, and payment tracking across nationwide depots.",
       contribution: "Designed and built the full-stack web management dashboard, SQL Server database schemas, REST APIs, and multi-tier approval state machines.",
@@ -46,14 +48,14 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "iglootrack",
+    images: [], // drop files in public/projects/iglootrack/ and list e.g. "projects/iglootrack/cover.png"
+    metrics: ["TODO: N freezers tracked", "TODO: N shops mapped"],
     number: "02",
     title: "IglooTrack",
     subtitle: "Mobile Asset & Freezer Tracking Solution",
     category: "Mobile Operations",
     description: "Mobile-first freezer and commercial asset tracking solution designed for field operations and retail point-of-sale mapping.",
     technologies: ["React Native", "ASP.NET Core Web API", "SQL Server"],
-    featured: true,
-    aspectRatio: "16 / 10",
     caseStudyDetails: {
       problem: "Commercial refrigeration units deployed in retail shops lacked instant serial identification, verified shop assignments, and transfer history tracking.",
       contribution: "Developed the mobile scanning app, backend REST APIs, and asset relocation history schemas.",
@@ -69,14 +71,16 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "pink-fresh",
+    // TODO: add URL
+    liveUrl: undefined,
+    images: [], // drop files in public/projects/pink-fresh/ and list e.g. "projects/pink-fresh/cover.png"
+    metrics: ["TODO: result, e.g. page speed or launch date"],
     number: "03",
     title: "Pink Fresh",
     subtitle: "Custom Shopify Storefront & Liquid Architecture",
     category: "E-commerce",
     description: "Custom Shopify storefront developed during tenure at Clicko Digital, featuring bespoke Liquid theme sections, metafields, and high-converting product pages.",
     technologies: ["Shopify", "Liquid", "JavaScript", "HTML", "CSS"],
-    featured: true,
-    aspectRatio: "16 / 10",
     caseStudyDetails: {
       problem: "Default Shopify themes restricted merchant brand storytelling, structured product metadata display, and customized product section layouts.",
       contribution: "Engineered custom Liquid theme templates, responsive frontend UI components, and merchant-configurable section schemas.",
@@ -92,6 +96,8 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "aml-core",
+    images: [], // drop files in public/projects/aml-core/ and list e.g. "projects/aml-core/cover.png"
+    metrics: ["TODO: N companies / departments modelled"],
     number: "04",
     title: "AML Core / Task Management",
     subtitle: "Enterprise Governance & RACI Work-Management Prototype",
@@ -99,8 +105,6 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
     description: "Enterprise work-management concept and prototype engineered for group-wide project tracking, RACI responsibility assignment, and department visibility.",
     technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
     isPrototype: true,
-    featured: true,
-    aspectRatio: "16 / 10",
     caseStudyDetails: {
       problem: "Group-wide projects across corporate business units needed standardized task governance and clear RACI responsibility assignment.",
       contribution: "Designed and built the frontend component architecture, TypeScript data models, RACI matrix views, and executive dashboard prototype.",
@@ -124,8 +128,7 @@ export const EXPERIMENT_PROJECTS: ProjectItem[] = [
     description: "Computer-vision based home automation project utilizing gesture recognition and MQTT protocol for touchless appliance interaction.",
     category: "Computer Vision",
     technologies: ["Python", "Computer Vision", "MQTT"],
-    githubUrl: "https://github.com/nafis217/Hand-Gesture-Home-Automation-System",
-    featured: false
+    githubUrl: "https://github.com/nafis217/Hand-Gesture-Home-Automation-System"
   },
   {
     id: "weather-app",
@@ -134,8 +137,7 @@ export const EXPERIMENT_PROJECTS: ProjectItem[] = [
     description: "Asynchronous weather forecasting dashboard demonstrating clean REST API integration, query caching, and responsive frontend UI.",
     category: "Web Application",
     technologies: ["JavaScript", "HTML5", "CSS3", "REST API"],
-    githubUrl: "https://github.com/nafis217/weather-app",
-    featured: false
+    githubUrl: "https://github.com/nafis217/weather-app"
   },
   {
     id: "todo-app",
@@ -144,7 +146,6 @@ export const EXPERIMENT_PROJECTS: ProjectItem[] = [
     description: "Client-side task management tool focusing on state management, category filtering, and browser local storage persistence.",
     category: "Web Utility",
     technologies: ["JavaScript", "HTML5", "CSS3"],
-    githubUrl: "https://github.com/nafis217/Todo-List",
-    featured: false
+    githubUrl: "https://github.com/nafis217/Todo-List"
   }
 ];

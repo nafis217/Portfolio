@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Copy, Check, Mail } from 'lucide-react';
+import { ArrowRight, Copy, Check } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
@@ -66,7 +66,7 @@ export const Contact: React.FC = () => {
               className="hover:text-white transition-colors flex items-center gap-2"
             >
               <GithubIcon className="w-4 h-4" />
-              <span>github.com/nafis217</span>
+              <span>github.com/{PROFILE_DATA.contact.githubHandle}</span>
             </a>
 
             <span className="text-slate-700">•</span>
@@ -79,16 +79,6 @@ export const Contact: React.FC = () => {
             >
               <LinkedinIcon className="w-4 h-4 text-sky-400" />
               <span>LinkedIn</span>
-            </a>
-
-            <span className="text-slate-700">•</span>
-
-            <a
-              href={`mailto:${PROFILE_DATA.contact.email}`}
-              className="hover:text-white transition-colors flex items-center gap-2"
-            >
-              <Mail className="w-4 h-4 text-indigo-400" />
-              <span>{PROFILE_DATA.contact.email}</span>
             </a>
           </div>
 

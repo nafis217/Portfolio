@@ -6,19 +6,20 @@ export interface Profile {
   headline: string;
   tagline: string;
   currentRoleContext: string;
+  availability: string;
+  siteUrl: string;
+  cvPath: string;
   contact: {
     email: string;
     github: string;
+    githubHandle: string;
     linkedin: string;
-    calendar: string;
   };
   about: {
     philosophy: string;
     interests: string[];
   };
 }
-
-const env = import.meta.env;
 
 export const PROFILE_DATA: Profile = {
   name: "Md Nafis Al Safayet",
@@ -28,11 +29,16 @@ export const PROFILE_DATA: Profile = {
   headline: "Software Engineer building practical digital products for real business operations.",
   tagline: "I work across web, mobile, APIs and data — turning operational workflows into reliable software.",
   currentRoleContext: "Currently building enterprise software at Igloo Ice Cream / Abdul Monem Limited.",
+  availability: "Open to full-time roles and freelance projects.",
+  // Assumes GitHub Pages project site; change if you use a custom domain.
+  siteUrl: "https://nafis217.github.io/portfolio/",
+  // File lives in /public — see public/README-CV.txt
+  cvPath: "Md-Nafis-Al-Safayet-CV.pdf",
   contact: {
-    email: env.VITE_CONTACT_EMAIL || "nafisalsafayet7@gmail.com",
-    github: env.VITE_GITHUB_URL || "https://github.com/nafis217",
-    linkedin: env.VITE_LINKEDIN_URL || "[LINKEDIN_URL]",
-    calendar: env.VITE_CALENDAR_URL || "[CALENDAR_BOOKING_URL]",
+    email: "nafisalsafayet7@gmail.com",
+    github: "https://github.com/nafis217",
+    githubHandle: "nafis217",
+    linkedin: "https://www.linkedin.com/in/md-nafis-al-safayet-040569322/",
   },
   about: {
     philosophy: "Outside writing code, I'm interested in understanding how products and businesses actually work. That curiosity often influences the systems I build — especially internal tools where usability matters as much as engineering.",

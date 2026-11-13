@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, ChevronDown, ChevronUp, AlertCircle, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, ChevronUp, AlertCircle, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { SELECTED_PROJECTS, EXPERIMENT_PROJECTS, type ProjectItem } from '../data/projects';
 import { GithubIcon } from './SocialIcons';
+
+const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+// TODO placeholders are only shown in dev so they never ship to the live site.
+const visibleMetrics = (metrics?: string[]) =>
+  (metrics ?? []).filter(m => import.meta.env.DEV || !m.startsWith('TODO'));
 
 export const Projects: React.FC = () => {
   const [expandedProjectId, setExpandedProjectId] = useState<string | null>(null);
@@ -41,39 +47,24 @@ export const Projects: React.FC = () => {
               >
                 <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${isWideFirst ? '' : 'lg:flex-row-reverse'}`}>
                   
-                  {/* Visual Preview Banner Block */}
-                  <div className={`${isWideFirst ? 'lg:col-span-7' : 'lg:col-span-5'} ${!isWideFirst && 'lg:order-2'} w-full overflow-hidden`}>
-                    <div className="project-image-wrap relative min-h-[220px] sm:min-h-[260px] flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-slate-100 to-slate-200/80">
-                      
-                      {/* Visual Editorial Frame */}
-                      <div className="w-full h-full rounded-xl bg-white shadow-xs border border-slate-200/80 p-5 flex flex-col justify-between overflow-hidden relative">
-                        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                          <span className="font-mono text-xs font-bold text-slate-500">{project.number}</span>
-                          <span className="text-[11px] font-mono font-medium text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded">
-                            {project.category}
+                  {/* Cover: first screenshot, or placeholder when none supplied */}
+                  <div className={`${isWideFirst ? 'lg:col-span-7' : 'lg:col-span-5 lg:order-2'} w-full overflow-hidden`}>
+                    <div className="project-image-wrap relative aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200/80">
+                      {project.images && project.images.length > 0 ? (
+                        <img
+                          src={assetUrl(project.images[0])}
+                          alt={`${project.title} screenshot`}
+                          loading="lazy"
+                          className="w-full h-full object-cover object-top"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-400 p-6 text-center">
+                          <ImageIcon className="w-8 h-8" aria-hidden="true" />
+                          <span className="text-xs font-mono">
+                            Screenshots available on request
                           </span>
                         </div>
-
-                        <div className="space-y-1.5 py-4">
-                          <div className="text-lg font-bold font-heading text-slate-900 leading-snug">
-                            {project.title}
-                          </div>
-                          {project.subtitle && (
-                            <div className="text-xs text-slate-500 font-mono">
-                              {project.subtitle}
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100">
-                          {project.technologies.slice(0, 4).map(tech => (
-                            <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
+                      )}
                     </div>
                   </div>
 
@@ -99,6 +90,16 @@ export const Projects: React.FC = () => {
                       {project.description}
                     </p>
 
+                    {visibleMetrics(project.metrics).length > 0 && (
+                      <ul className="flex flex-wrap gap-2" aria-label="Key results">
+                        {visibleMetrics(project.metrics).map(m => (
+                          <li key={m} className="text-[11px] font-mono font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">
+                            {m}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
                     {/* Tech Stack Pills */}
                     <div className="flex flex-wrap gap-2 pt-1">
                       {project.technologies.map(tech => (
@@ -109,7 +110,18 @@ export const Projects: React.FC = () => {
                     </div>
 
                     {/* Action Links */}
-                    <div className="pt-2 flex items-center gap-4">
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary-editorial text-xs py-2 px-3.5"
+                        >
+                          <span>Visit Live Site</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
                       {project.caseStudyDetails && (
                         <button
                           onClick={() => toggleExpand(project.id)}

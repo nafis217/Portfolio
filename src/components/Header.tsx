@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
+
+const CV_HREF = `${import.meta.env.BASE_URL}${PROFILE_DATA.cvPath}`;
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,11 +60,12 @@ export const Header: React.FC = () => {
           </nav>
 
           <a
-            href="#contact"
+            href={CV_HREF}
+            download
             className="btn-primary-editorial text-xs py-2 px-4"
           >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Download CV</span>
+            <Download className="w-3.5 h-3.5" />
           </a>
         </div>
 
@@ -93,12 +96,13 @@ export const Header: React.FC = () => {
             ))}
             <div className="pt-4 border-t border-slate-100">
               <a
-                href="#contact"
+                href={CV_HREF}
+                download
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn-primary-editorial w-full justify-center text-xs py-3"
               >
-                <span>Let's Talk</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span>Download CV</span>
+                <Download className="w-4 h-4" />
               </a>
             </div>
           </div>
