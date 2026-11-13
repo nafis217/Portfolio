@@ -42,6 +42,6 @@ export const PROFILE_DATA: Profile = {
   },
   about: {
     philosophy: "Outside writing code, I'm interested in understanding how products and businesses actually work. That curiosity often influences the systems I build — especially internal tools where usability matters as much as engineering.",
-    interests: ["Travel", "Photography", "Fitness", "Emerging Technology", "Product Design"]
+    interests: ["Swimming", "Photography", "Travel", "Fitness", "Artificial Intelligence", "Software Architecture"]
   }
 };

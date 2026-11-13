@@ -22,7 +22,7 @@ export const EDUCATION_DATA: Education[] = [
     institution: "Birshreshtha Noor Mohammad Public College",
     degree: "Higher Secondary Certificate",
     field: "Science",
-    period: "2018 — 2021",
+    period: "2018 — 2020",
     location: "Dhaka, Bangladesh",
     isPrimary: false
   },
@@ -33,5 +33,21 @@ export const EDUCATION_DATA: Education[] = [
     period: "2013 — 2018",
     location: "Rangpur, Bangladesh",
     isPrimary: false
+  }
+];
+
+export interface Honor {
+  title: string;
+  issuer: string;
+  year: string;
+  description?: string;
+}
+
+export const HONORS_DATA: Honor[] = [
+  {
+    title: "Employee of the Month",
+    issuer: "Clicko Digital",
+    year: "2026",
+    description: "Recognized for outstanding performance and contribution to software development initiatives."
   }
 ];

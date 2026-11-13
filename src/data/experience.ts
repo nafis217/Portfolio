@@ -12,7 +12,7 @@ export interface Experience {
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: "igloo",
-    period: "2026 — PRESENT",
+    period: "JUN 2026 — PRESENT",
     company: "Igloo Ice Cream / Abdul Monem Limited",
     role: "Software Engineer",
     subRole: "Senior Executive — MIS (Software Engineering)",
@@ -27,7 +27,7 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: "clicko",
-    period: "2025 — 2026",
+    period: "JUN 2025 — JUN 2026",
     company: "Clicko Digital",
     role: "Junior Software Engineer",
     location: "Dhaka, Bangladesh",
@@ -41,11 +41,11 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: "technocolabs",
-    period: "2024",
+    period: "MAY 2024 — JUL 2024",
     company: "TechnoColabs Softwares Inc.",
     role: "Software Engineer Intern",
     location: "Indore, India",
-    description: "Assisted in web application development, REST API testing, UI components building, and code documentation.",
+    description: "Contributed to software development, data analysis, technical problem-solving, REST API testing and UI component building.",
     highlights: [
       "React component building & client-side state handling",
       "REST API testing & Postman API workflows",

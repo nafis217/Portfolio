@@ -1,5 +1,5 @@
 import React from 'react';
-import { EDUCATION_DATA, type Education as EducationType } from '../data/education';
+import { EDUCATION_DATA, HONORS_DATA, type Education as EducationType } from '../data/education';
 
 export const Education: React.FC = () => {
   const primaryEdu = EDUCATION_DATA.find(e => e.isPrimary)!;
@@ -64,6 +64,25 @@ export const Education: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Honors */}
+        {HONORS_DATA.length > 0 && (
+          <div className="pt-10 space-y-4">
+            <h3 className="text-xl font-bold font-heading text-slate-900">Honors & Awards</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {HONORS_DATA.map((h) => (
+                <div key={h.title} className="p-5 rounded-xl bg-white border border-slate-200/80 space-y-1">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-500">
+                    <span>{h.issuer}</span>
+                    <span>{h.year}</span>
+                  </div>
+                  <h4 className="text-base font-bold font-heading text-slate-900">{h.title}</h4>
+                  {h.description && <p className="text-xs text-slate-600">{h.description}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

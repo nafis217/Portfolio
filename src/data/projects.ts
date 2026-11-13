@@ -70,12 +70,22 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
     }
   },
   {
+    id: "my-salon",
+    number: "03",
+    title: "MY-SALON",
+    subtitle: "Multi-Tenant Salon SaaS Platform",
+    category: "SaaS Platform",
+    description: "Multi-tenant salon SaaS platform with booking, real-time queues, POS, staff management and payment workflows. Tenant isolation is enforced with PostgreSQL Row-Level Security and Entity Framework Core.",
+    images: [], // drop files in public/projects/my-salon/ and list e.g. "projects/my-salon/cover.png"
+    metrics: ["Designed for 1,000+ salon tenants"],
+    technologies: ["Next.js", "TypeScript", "ASP.NET Core", "PostgreSQL", "SignalR", "Docker"]
+  },
+  {
     id: "pink-fresh",
-    // TODO: add URL
-    liveUrl: undefined,
+    liveUrl: "https://www.pinkfreshstudio.com/collections",
     images: [], // drop files in public/projects/pink-fresh/ and list e.g. "projects/pink-fresh/cover.png"
     metrics: ["TODO: result, e.g. page speed or launch date"],
-    number: "03",
+    number: "04",
     title: "Pink Fresh",
     subtitle: "Custom Shopify Storefront & Liquid Architecture",
     category: "E-commerce",
@@ -98,7 +108,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
     id: "aml-core",
     images: [], // drop files in public/projects/aml-core/ and list e.g. "projects/aml-core/cover.png"
     metrics: ["TODO: N companies / departments modelled"],
-    number: "04",
+    number: "05",
     title: "AML Core / Task Management",
     subtitle: "Enterprise Governance & RACI Work-Management Prototype",
     category: "Governance Prototype",
@@ -123,7 +133,7 @@ export const SELECTED_PROJECTS: ProjectItem[] = [
 export const EXPERIMENT_PROJECTS: ProjectItem[] = [
   {
     id: "hand-gesture",
-    number: "05",
+    number: "06",
     title: "Hand Gesture Home Automation System",
     description: "Computer-vision based home automation project utilizing gesture recognition and MQTT protocol for touchless appliance interaction.",
     category: "Computer Vision",
@@ -132,7 +142,7 @@ export const EXPERIMENT_PROJECTS: ProjectItem[] = [
   },
   {
     id: "weather-app",
-    number: "06",
+    number: "07",
     title: "Weather Application",
     description: "Asynchronous weather forecasting dashboard demonstrating clean REST API integration, query caching, and responsive frontend UI.",
     category: "Web Application",
@@ -141,7 +151,7 @@ export const EXPERIMENT_PROJECTS: ProjectItem[] = [
   },
   {
     id: "todo-app",
-    number: "07",
+    number: "08",
     title: "Todo Application",
     description: "Client-side task management tool focusing on state management, category filtering, and browser local storage persistence.",
     category: "Web Utility",
