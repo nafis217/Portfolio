@@ -2,7 +2,7 @@
 
 Personal portfolio site for a software engineer working across React, React Native, ASP.NET Core and SQL Server. It is a single-page static site: selected work, experience, skills, research, education, and contact.
 
-**Live site:** https://nafis217.github.io/portfolio/
+**Live site:** https://mdnafisalsafayet.pages.dev/
 
 ## Stack
 
@@ -30,4 +30,10 @@ All content lives in `src/data/` (`profile.ts`, `projects.ts`, `experience.ts`, 
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs `npm ci` and `npm run build`, then publishes `dist/` to GitHub Pages. Pages must be set to **Source: GitHub Actions** in the repo settings. Assets use relative paths (`base: './'`); set `VITE_BASE_PATH` only if you need a fixed sub-path.
+Hosted on **Cloudflare Pages**, connected to this repo's `main` branch: every push builds and publishes automatically.
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Environment variable: `NODE_VERSION=22`
+
+Assets use relative paths (`base: './'`), so the site also works under a sub-path. The GitHub Actions workflow in `.github/workflows/deploy.yml` is an alternative GitHub Pages deploy.

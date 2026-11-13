@@ -31,7 +31,7 @@ export const PROFILE_DATA: Profile = {
   currentRoleContext: "Currently building enterprise software at Igloo Ice Cream / Abdul Monem Limited.",
   availability: "Open to full-time roles and freelance projects.",
   // Assumes GitHub Pages project site; change if you use a custom domain.
-  siteUrl: "https://nafis217.github.io/Portfolio/",
+  siteUrl: "https://mdnafisalsafayet.pages.dev/",
   // File lives in /public — see public/README-CV.txt
   cvPath: "Md-Nafis-Al-Safayet-CV.pdf",
   contact: {
