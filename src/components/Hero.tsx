@@ -1,149 +1,117 @@
 import React from 'react';
-import { ArrowRight, MapPin, Building2, GraduationCap, Layers, Database, ArrowRightLeft, ShieldCheck } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../config/portfolioData';
+import { ArrowRight, ArrowUpRight, MapPin, Building2 } from 'lucide-react';
+import { PROFILE_DATA } from '../data/profile';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-24 border-b border-slate-200/80 bg-architectural-grid">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <section id="hero" className="pt-[110px] pb-16 sm:pt-[130px] sm:pb-24 border-b border-slate-200/60 relative">
+      <div className="page-container">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Left Column: Identity & Bio */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left Column: Short, Impactful Editorial Content */}
+          <div className="lg:col-span-7 space-y-5">
             
-            {/* Status & Location Pill */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-emerald-50 text-emerald-700 border border-emerald-200/80 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Active Systems Engineer</span>
-              </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200">
-                <MapPin className="w-3 h-3 text-slate-500" />
-                <span>{PORTFOLIO_DATA.personal.location}</span>
+            {/* Context Badge */}
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium text-slate-600 bg-slate-100/90 px-3 py-1.5 rounded-full border border-slate-200">
+              <span className="w-2 h-2 rounded-full bg-sky-600"></span>
+              <span className="uppercase tracking-wider font-semibold">SOFTWARE ENGINEER</span>
+              <span className="text-slate-300">•</span>
+              <span className="flex items-center gap-1 text-slate-500">
+                <MapPin className="w-3 h-3 text-slate-400" /> {PROFILE_DATA.location}
               </span>
             </div>
 
-            {/* Name & Primary Title */}
-            <div className="space-y-2">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
-                {PORTFOLIO_DATA.personal.name}
+            {/* Scaled Name Heading (No clipping under header) */}
+            <div className="space-y-1">
+              <h1 className="hero-heading">
+                {PROFILE_DATA.name}
               </h1>
-              <div className="text-xl sm:text-2xl font-bold font-heading text-sky-800 tracking-tight">
-                {PORTFOLIO_DATA.personal.title}
-              </div>
+              <p className="text-base sm:text-lg font-medium text-slate-900 leading-snug max-w-xl">
+                {PROFILE_DATA.headline}
+              </p>
             </div>
 
-            {/* Core Value Headline */}
-            <p className="text-lg sm:text-xl text-slate-800 font-medium leading-relaxed max-w-2xl">
-              "{PORTFOLIO_DATA.personal.headline}"
+            {/* Supporting Copy */}
+            <p className="body-large text-slate-600">
+              {PROFILE_DATA.tagline}
             </p>
 
-            {/* Human Bio */}
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
-              {PORTFOLIO_DATA.personal.bio}
-            </p>
-
-            {/* Organization & Education Badges */}
-            <div className="p-4 rounded-xl bg-white border border-slate-200 space-y-2 text-xs font-mono">
-              <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                <Building2 className="w-4 h-4 text-sky-700 shrink-0" />
-                <span>Igloo Ice Cream / Abdul Monem Limited</span>
-                <span className="text-[10px] text-slate-500 font-normal">({PORTFOLIO_DATA.experience[0].period})</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
-                <span>{PORTFOLIO_DATA.personal.educationBrief}</span>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="#work" className="btn-editorial-primary">
-                <span>Explore Selected Work</span>
+            {/* Primary Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a href="#work" className="btn-primary-editorial">
+                <span>View Selected Work</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a href="#how-i-build" className="btn-editorial-secondary">
-                <span>How I Build Systems</span>
+              <a href="#about" className="btn-secondary-editorial">
+                <span>About Me</span>
+                <ArrowUpRight className="w-4 h-4" />
               </a>
+            </div>
+
+            {/* Current Context Line */}
+            <div className="pt-2 flex items-center gap-2 text-xs text-slate-500 font-mono">
+              <Building2 className="w-3.5 h-3.5 text-sky-700 shrink-0" />
+              <span>{PROFILE_DATA.currentRoleContext}</span>
             </div>
 
           </div>
 
-          {/* Right Column: BUSINESS → SYSTEM → SOFTWARE Diagram */}
-          <div className="lg:col-span-5">
-            <div className="editorial-panel p-6 sm:p-7 bg-white border-slate-200 shadow-sm relative space-y-6">
+          {/* Right Column: Abstract Editorial Visual Block */}
+          <div className="lg:col-span-5 w-full overflow-hidden">
+            <div className="editorial-card-soft p-5 sm:p-6 space-y-4 bg-white border border-slate-200">
               
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <span className="text-xs font-mono font-semibold text-slate-500 uppercase tracking-wider">
-                  Operational Blueprint Matrix
+                  Engineering Scope
                 </span>
-                <span className="text-[10px] font-mono bg-sky-50 text-sky-700 px-2 py-0.5 rounded border border-sky-200 flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3" /> Full Lifecycle
+                <span className="text-[11px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-100 font-medium">
+                  Full-Stack
                 </span>
               </div>
 
-              {/* 3-Tier Diagram Blocks */}
-              <div className="space-y-3 font-mono text-xs">
+              {/* 3 Restrained Pillars */}
+              <div className="space-y-3 font-heading">
                 
-                {/* Tier 1: Business Operations */}
-                <div className="p-3.5 rounded-lg bg-amber-50/60 border border-amber-200/80 space-y-1">
-                  <div className="flex items-center justify-between font-bold text-amber-900">
-                    <span className="flex items-center gap-1.5">
-                      <Building2 className="w-3.5 h-3.5 text-amber-700" /> 01. BUSINESS OPERATIONS
-                    </span>
-                    <span className="text-[10px] bg-amber-200/60 px-1.5 py-0.5 rounded">Friction</span>
+                {/* Pillar 01 */}
+                <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-100 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-900">01. ENGINEERING</span>
+                    <span className="text-[10px] font-mono text-sky-700 font-medium">System</span>
                   </div>
-                  <p className="text-[11px] text-amber-800 font-sans">
-                    Order flows, delivery dispatch, distributor approvals, physical freezer tracking & RACI accountability.
-                  </p>
+                  <p className="text-xs text-slate-500 font-sans">ASP.NET Core, React, TypeScript & SQL Server architectures.</p>
                 </div>
 
-                <div className="flex justify-center text-slate-400">
-                  <ArrowRightLeft className="w-4 h-4 rotate-90" />
-                </div>
-
-                {/* Tier 2: System Architecture */}
-                <div className="p-3.5 rounded-lg bg-sky-50/60 border border-sky-200/80 space-y-1">
-                  <div className="flex items-center justify-between font-bold text-sky-900">
-                    <span className="flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-sky-700" /> 02. SYSTEM ARCHITECTURE
-                    </span>
-                    <span className="text-[10px] bg-sky-200/60 px-1.5 py-0.5 rounded">Design</span>
+                {/* Pillar 02 */}
+                <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-100 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-900">02. PRODUCT</span>
+                    <span className="text-[10px] font-mono text-indigo-700 font-medium">Interface</span>
                   </div>
-                  <p className="text-[11px] text-sky-800 font-sans">
-                    Relational SQL Server schemas, ASP.NET Core REST APIs, security roles & state machines.
-                  </p>
+                  <p className="text-xs text-slate-500 font-sans">React Native mobile apps & custom Shopify Liquid storefronts.</p>
                 </div>
 
-                <div className="flex justify-center text-slate-400">
-                  <ArrowRightLeft className="w-4 h-4 rotate-90" />
-                </div>
-
-                {/* Tier 3: Practical Software */}
-                <div className="p-3.5 rounded-lg bg-emerald-50/60 border border-emerald-200/80 space-y-1">
-                  <div className="flex items-center justify-between font-bold text-emerald-900">
-                    <span className="flex items-center gap-1.5">
-                      <Database className="w-3.5 h-3.5 text-emerald-700" /> 03. PRACTICAL SOFTWARE
-                    </span>
-                    <span className="text-[10px] bg-emerald-200/60 px-1.5 py-0.5 rounded">Deliverable</span>
+                {/* Pillar 03 */}
+                <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-100 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-900">03. OPERATIONS</span>
+                    <span className="text-[10px] font-mono text-emerald-700 font-medium">Business</span>
                   </div>
-                  <p className="text-[11px] text-emerald-800 font-sans">
-                    React web management dashboards, React Native mobile scanner apps & Shopify Liquid storefronts.
-                  </p>
+                  <p className="text-xs text-slate-500 font-sans">Order management workflows, approvals & freezer asset tracking.</p>
                 </div>
 
               </div>
 
-              {/* Bottom Quote */}
-              <div className="pt-3 border-t border-slate-200 text-[11px] font-sans text-slate-500 italic">
-                "Software isn't just UI code; it's the operational spine of a working business."
+              <div className="pt-1 text-[11px] font-mono text-slate-400 text-center">
+                Built for operational reliability.
               </div>
 
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );

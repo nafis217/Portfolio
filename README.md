@@ -2,7 +2,7 @@
 
 A high-performance, responsive single-page developer portfolio built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed specifically for automated continuous deployment to **GitHub Pages** using **GitHub Actions**.
 
-![Portfolio Preview](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><rect width='100%' height='100%' fill='%23090d16'/><text x='50%' y='45%' fill='%2338bdf8' font-size='32' font-family='sans-serif' font-weight='bold' text-anchor='middle'>Alex Rivera — Developer Portfolio</text><text x='50%' y='60%' fill='%2394a3b8' font-size='18' font-family='sans-serif' text-anchor='middle'>React 19 • TypeScript • Vite • GitHub Actions • 100% Static</text></svg>)
+![Portfolio Preview](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><rect width='100%' height='100%' fill='%23faf9f5'/><text x='50%' y='45%' fill='%230f172a' font-size='32' font-family='sans-serif' font-weight='bold' text-anchor='middle'>Md Nafis Al Safayet — Software Engineer</text><text x='50%' y='60%' fill='%230284c7' font-size='18' font-family='sans-serif' text-anchor='middle'>React 19 • TypeScript • Vite • ASP.NET Core • 100% Static</text></svg>)
 
 ---
 
