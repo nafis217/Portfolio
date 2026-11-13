@@ -1,5 +1,7 @@
 export interface Experience {
   id: string;
+  /** Colours the section blends to while this role is in view. */
+  theme: { soft: string; deep: string };
   period: string;
   company: string;
   role: string;
@@ -12,6 +14,7 @@ export interface Experience {
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: "igloo",
+    theme: { soft: "#bcd4e6", deep: "#2f5d86" },
     period: "JUN 2026 — PRESENT",
     company: "Igloo Ice Cream / Abdul Monem Limited",
     role: "Software Engineer",
@@ -27,6 +30,7 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: "clicko",
+    theme: { soft: "#f3d9c7", deep: "#9a5b34" },
     period: "JUN 2025 — JUN 2026",
     company: "Clicko Digital",
     role: "Junior Software Engineer",
@@ -41,6 +45,7 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: "technocolabs",
+    theme: { soft: "#c2e2d3", deep: "#2f7a62" },
     period: "MAY 2024 — JUL 2024",
     company: "TechnoColabs Softwares Inc.",
     role: "Software Engineer Intern",
