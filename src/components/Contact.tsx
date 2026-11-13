@@ -29,6 +29,11 @@ export const Contact: React.FC = () => {
             Whether it's a digital product, internal system, e-commerce experience or engineering challenge, I'm always interested in a good problem.
           </p>
 
+          <p className="inline-flex items-center gap-2 text-sm font-mono text-emerald-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" aria-hidden="true"></span>
+            {PROFILE_DATA.availability}
+          </p>
+
           {/* Action CTAs */}
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             <a

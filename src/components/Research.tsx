@@ -1,5 +1,9 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { RESEARCH_DATA } from '../data/research';
+
+const showTodo = import.meta.env.DEV;
+const isTodo = (v: string) => v.startsWith('TODO');
 
 export const Research: React.FC = () => {
   return (
@@ -40,15 +44,40 @@ export const Research: React.FC = () => {
             {RESEARCH_DATA.description}
           </p>
 
+          {/* Evaluation context */}
+          {[['Dataset', RESEARCH_DATA.dataset], ['Baseline', RESEARCH_DATA.baseline]]
+            .filter(([, v]) => showTodo || !isTodo(v))
+            .map(([label, value]) => (
+              <p key={label} className="text-xs font-mono text-slate-600">
+                <span className="font-semibold text-slate-800">{label}:</span> {value}
+              </p>
+            ))}
+
           {/* Research Results Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            {RESEARCH_DATA.metrics.map((m, idx) => (
-              <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-                <span className="text-xs font-mono text-slate-600">{m.label}</span>
-                <span className="text-lg font-bold font-mono text-indigo-700">{m.value}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            {RESEARCH_DATA.metrics.map((m) => (
+              <div key={m.label} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                <span className="text-xs font-mono text-slate-600 block">{m.label}</span>
+                <span className="text-2xl font-bold font-mono text-indigo-700 block mt-1">{m.value}</span>
+                {m.note && <span className="text-[11px] font-mono text-slate-400">{m.note}</span>}
               </div>
             ))}
           </div>
+
+          {/* Optional publication links */}
+          {RESEARCH_DATA.links && Object.values(RESEARCH_DATA.links).some(Boolean) && (
+            <div className="flex flex-wrap gap-3 pt-2">
+              {([['paper', 'Paper'], ['thesis', 'Thesis'], ['repo', 'Code']] as const).map(([key, label]) => {
+                const href = RESEARCH_DATA.links?.[key];
+                return href ? (
+                  <a key={key} href={href} target="_blank" rel="noopener noreferrer" className="btn-secondary-editorial text-xs py-2 px-3.5">
+                    <span>{label}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                ) : null;
+              })}
+            </div>
+          )}
 
         </div>
 

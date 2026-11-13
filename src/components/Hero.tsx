@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, MapPin, Building2 } from 'lucide-react';
+import { ArrowRight, ArrowDown, MapPin, Building2 } from 'lucide-react';
 import { PROFILE_DATA } from '../data/profile';
 
 export const Hero: React.FC = () => {
@@ -46,7 +46,7 @@ export const Hero: React.FC = () => {
 
               <a href="#about" className="btn-secondary-editorial">
                 <span>About Me</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowDown className="w-4 h-4" />
               </a>
             </div>
 

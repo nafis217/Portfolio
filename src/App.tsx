@@ -17,12 +17,12 @@ export function App() {
       <main>
         <Hero />
         <Projects />
+        <About />
         <Experience />
         <SkillsSystem />
         <Research />
         <Education />
         <HowIWork />
-        <About />
         <Contact />
       </main>
       <Footer />

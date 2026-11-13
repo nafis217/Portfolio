@@ -164,6 +164,18 @@ export const Projects: React.FC = () => {
                       </div>
                     </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed font-sans">
+                      <div className="space-y-1 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <strong className="text-emerald-400 font-mono block">System Delivered:</strong>
+                        <p className="text-slate-300">{project.caseStudyDetails.system}</p>
+                      </div>
+
+                      <div className="space-y-1 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <strong className="text-amber-400 font-mono block">Technology:</strong>
+                        <p className="text-slate-300">{project.caseStudyDetails.technology}</p>
+                      </div>
+                    </div>
+
                     <div className="space-y-2 pt-2">
                       <strong className="text-xs font-mono text-slate-400 uppercase tracking-wider block">Key Capabilities:</strong>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">

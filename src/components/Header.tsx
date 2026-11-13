@@ -19,10 +19,12 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Work', href: '#work' },
+    { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
     { name: 'Skills', href: '#skills' },
     { name: 'Research', href: '#research' },
-    { name: 'About', href: '#about' },
+    { name: 'Education', href: '#education' },
+    { name: 'Approach', href: '#how-i-work' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -46,7 +48,7 @@ export const Header: React.FC = () => {
         </a>
 
         {/* Right: Desktop Links & CTA */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           <nav className="flex items-center gap-6">
             {navLinks.map((link) => (
               <a
@@ -72,7 +74,7 @@ export const Header: React.FC = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900"
+          className="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -82,7 +84,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[72px] bg-white/95 backdrop-blur-xl border-b border-slate-200 p-6 shadow-lg animate-fade-in">
+        <div className="lg:hidden fixed inset-x-0 top-[72px] bg-white/95 backdrop-blur-xl border-b border-slate-200 p-6 shadow-lg animate-fade-in">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
